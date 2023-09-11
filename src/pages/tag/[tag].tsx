@@ -30,7 +30,8 @@ const tagPage = () => {
       <div>
         <FakeList />
       </div>
-    </div></>
+    </div>
+    </>
   );
 };
 

@@ -54,9 +54,7 @@ const Fake = ({
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(
-      `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}&per_page=5000`
-    )
+    fetch(`https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}`)
       .then((res) => res.json())
       .then((data) => {
         setDataMedia(data);

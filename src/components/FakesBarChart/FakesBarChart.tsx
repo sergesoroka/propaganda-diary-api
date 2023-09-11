@@ -24,9 +24,7 @@ export const FakesBarChart = () => {
   const [fakes, setFakes] = useState<number>(defaultFakesNumber);
 
   useEffect(() => {
-    fetch(
-      `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`
-    )
+    fetch(`https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}`)
       .then((res) => res.json())
       .then((data) => {
         setDataNarrative(data);

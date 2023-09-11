@@ -10,12 +10,8 @@ export default async function getMediaDataByCountryByMedia(
   const isMedia = media_name == "all" ? "" : "&media_name=" + `${media_name}`;
   const isCountry = country == "all" ? "" : "&country=" + country;
 
-  console.log(
-    `https://vox-dashboard.ra-devs.tech/api/dashboards?per_page=4000&lang=${locale}${isCountry}${isMedia}&narrative_id=${narrative_id}&sub_narrative_id=${sub_narrative_id}`
-  );
-
   const res = await fetch(
-    `https://vox-dashboard.ra-devs.tech/api/dashboards?per_page=4000&lang=${locale}${isCountry}${isMedia}&narrative_id=${narrative_id}&sub_narrative_id=${sub_narrative_id}`
+    `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isCountry}${isMedia}&narrative_id=${narrative_id}&sub_narrative_id=${sub_narrative_id}`
   );
   if (!res.ok) throw new Error("Fail to fetch data");
   return res.json();

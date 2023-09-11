@@ -27,7 +27,7 @@ const FakeList = ({
 
   useEffect(() => {
     fetch(
-      `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=4000`
+      `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}`
     )
       .then((res) => res.json())
       .then((data) => {

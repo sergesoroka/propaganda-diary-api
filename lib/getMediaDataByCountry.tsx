@@ -8,7 +8,7 @@ export default async function getMediaDataByCountry(
   const isCountry = country == "all" ? "" : "&country=" + country;
 
   const res = await fetch(
-    `https://vox-dashboard.ra-devs.tech/api/dashboards?per_page=4000&lang=${locale}${isCountry}${isMedia}`
+    `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isCountry}${isMedia}`
   );
   if (!res.ok) throw new Error("Fail to fetch data");
   return res.json();

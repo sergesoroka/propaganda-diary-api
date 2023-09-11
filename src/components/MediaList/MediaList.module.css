@@ -1,0 +1,29 @@
+.listItem {
+  font-size: 0.8rem;
+  line-height: 2rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.listItemActive {
+  font-size: 0.8rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  user-select: none;
+  margin-right: 1rem;
+}
+
+.MediaList {
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 850px;
+}
+
+.allMediaButton {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}

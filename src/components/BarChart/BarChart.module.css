@@ -1,0 +1,104 @@
+.subtitle {
+  text-transform: uppercase;
+  color: #9a9a9a;
+  font-size: 0.76rem;
+  font-weight: 600 !important;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+
+
+.barChart {
+  width: 830px;
+  height: 200px;
+}
+
+.bar {
+  width: 60px !important;
+  margin-right: 1rem;
+}
+
+.bar:hover {
+  fill: #656565 !important;
+  transition-duration: 0.4s;
+}
+
+.barActive {
+  fill: #ff2618 !important;
+}
+
+.barNumbers {
+  color: #a4a4a4;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 20px;
+}
+.barNumbersCurrent {
+  color: #a4a4a4;
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+  margin: 0 20px;
+}
+.barNumbersMob {
+  color: #a4a4a4;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.84rem;
+}
+.barNumbersCurrentMob {
+  color: #a4a4a4;
+  display: flex;
+  justify-content: space-between;
+  width: 45px;
+  font-size: 0.84rem;
+}
+
+.barNumbers > p { 
+  width: 20px;
+}
+
+.bar:hover .barNumbers {
+  color: #ff2618 !important;
+}
+
+.BarChartMob {
+  display: none;
+}
+
+.yearsWrap {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.year {
+  cursor: pointer;
+  color: #656565;
+}
+.yearActive {
+  cursor: pointer;
+  color: #ff2618;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .BarChart {
+    display: none;
+  }
+  .BarChartMob {
+    display: inline-block;
+  }
+  /* .barChart {
+    width: 530px;
+    height: 200px;
+  }
+  .barActive,
+  .bar {
+    width: 20px !important;
+  } */
+}

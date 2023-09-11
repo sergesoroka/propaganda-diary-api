@@ -1,0 +1,23 @@
+.listCountryWrap {
+  padding: 2rem 18rem;
+}
+.listCountry {
+  display: flex;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  line-height: 2rem;
+}
+
+
+.listCountry li {
+  margin-right: 2rem;
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.03rem;
+  cursor: pointer;
+}
+.activeCountry {
+  color: var(--primary-color);
+}

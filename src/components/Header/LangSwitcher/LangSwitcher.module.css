@@ -1,0 +1,33 @@
+.switcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.switcher li {
+  list-style: none;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.langMenuActiveItem {
+  color: var(--primary-color);
+  font-size: .86rem;
+}
+
+.langMenuItem {
+  color: var(--light-grey-color);
+  font-size: .86rem;
+
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .switcher {
+    margin-right: 0;
+  }
+
+  .switcher li {
+    margin: 10px 0 0 10px;
+  }
+}

@@ -1,0 +1,82 @@
+.narrativeWrap {
+  margin: 1rem 0 0 0;
+}
+.narrativeItem {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: baseline;
+  /* gap: 0.3rem; */
+}
+
+.fakesNumber {
+  margin-top: 1rem;
+  padding: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.narrativeHeading {
+  color: #424242;
+  font-size: 1.26rem;
+  margin: 0 0 1rem 0.4rem;
+  cursor: pointer;
+}
+.narrativeHeading:hover {
+  color: var(--primary-color);
+  transition-duration: 0.4s;
+}
+
+.narrativeTag {
+  color: #919191;
+  margin: 0.6rem 0 1.6rem 0;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 700px) {
+  .narrativeHeading {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  .narrativeItem {
+    display: flex;
+    flex-direction: column;
+  }
+  .fakesNumber {
+    margin-top: 1rem;
+    padding: 0.4rem 0;
+  }
+}
+
+/* MediaList */
+
+.listItem {
+  font-size: 0.8rem;
+  line-height: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.listItemActive {
+  font-size: 0.8rem;
+  line-height: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  user-select: none;
+}
+
+.MediaList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 800px;
+  padding: 0 0.4rem;
+}
+
+.allMediaButton {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}

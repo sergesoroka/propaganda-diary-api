@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "en": "The West controls Ukraine and uses it for its own purposes",
+        "it": "L'Occidente controlla l'Ucraina e la usa per i propri scopi",
+        "de": "Der Westen kontrolliert die Ukraine und nutzt sie für seine eigenen Zwecke",
+        "ua": "Захід контролює Україну і використовує її у своїх цілях",
+        "ru": "Запад контролирует Украину и использует ее в своих целях",
+        "pl": "Zachód kontroluje Ukrainę i wykorzystuje ją do własnych celów",
+        "cs": "Západ kontroluje Ukrajinu a využívá ji pro své účely",
+        "sk": "Západ ovláda Ukrajinu a využíva ju na svoje účely",
+        "hu": "A Nyugat irányítja és saját céljaira használja fel Ukrajnát"
+    },
+    {
+        "id": "2",
+        "en": "The actions of Ukraine and the West forced Russia to start a war",
+        "it": "Le azioni dell'Ucraina e dell'Occidente hanno costretto la Russia a iniziare la guerra",
+        "de": "Die Aktionen der Ukraine und des Westens zwangen Russland, einen Krieg zu beginnen",
+        "ua": "Дії України та Заходу змусили Росію розпочати війну",
+        "ru": "Действия Украины и Запада заставили Россию начать войну",
+        "pl": "Działania Ukrainy i Zachodu zmusiły Rosję do rozpoczęcia wojny",
+        "cs": "Akce Ukrajiny a Západu donutily Rusko zahájit válku",
+        "sk": "Kroky Ukrajiny a Západu prinútili Rusko začať vojnu",
+        "hu": "Ukrajna és a Nyugat lépései kényszerítették háborúba Oroszországot"
+    },
+    {
+        "id": "3",
+        "en": "Military biological laboratories in Ukraine and drug laboratories",
+        "it": "Laboratori biologici militari e laboratori per la produzione di droga in Ucraina",
+        "de": "Militärbiologische Labors in der Ukraine und Drogenlabors",
+        "ua": "Військово-біологічні лабораторії в Україні та нарколабораторії",
+        "ru": "Военно-биологические лаборатории в Украине и нарколаборатории",
+        "pl": "Wojskowe laboratoria biologiczne w Ukrainie i laboratoria narkotykowe",
+        "cs": "Vojenské biologické laboratoře v Ukrajině a drogové laboratoře",
+        "sk": "Vojenské biologické laboratóriá na Ukrajine a drogové laboratóriá",
+        "hu": "Katonai biológiai laboratóriumok Ukrajnában és droglaboratóriumok"
+    },
+    {
+        "id": "4",
+        "en": "Narrative concerning historical events",
+        "it": "Discorso su eventi storici",
+        "de": "Das Narrativ über historische Ereignisse",
+        "ua": "Наратив щодо історичних подій",
+        "ru": "Нарратив об исторических событиях",
+        "pl": "Narracja dotycząca wydarzeń historycznych",
+        "cs": "Narativ o historických událostech",
+        "sk": "Príbeh o historických udalostiach",
+        "hu": "Narratíva a történelmi eseményekről"
+    },
+    {
+        "id": "5",
+        "en": "Support of Ukraine harms the West more than Russia",
+        "it": "Sostegno dell'Ucraina danneggia più l'Occidente che la Russia",
+        "de": "Die Unterstützung der Ukraine schadet dem Westen mehr als Russland",
+        "ua": "Підтримка України більше шкодить Заходу, ніж Росії",
+        "ru": "Поддержка Украины больше вредит Западу, чем России",
+        "pl": "Wspieranie Ukrainy szkodzi Zachodowi bardziej niż Rosji",
+        "cs": "Podpora Ukrajiny škodí Západu více než Rusku",
+        "sk": "Podpora Ukrajiny ubližuje Západu viac ako Rusku",
+        "hu": "Ukrajna támogatása jobban fáj a Nyugatnak, mint Oroszországnak"
+    }
+]

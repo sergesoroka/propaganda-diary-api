@@ -1,11 +1,14 @@
 import styles from "@/styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { useRouter } from "next/router";
 import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
 import SpetialText from "../../../data/SpetialText";
+
+import useSWR from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
 let defaultFakesNumber = 5;
 
@@ -14,35 +17,13 @@ export const FakesBarChart = () => {
   const { locale } = router;
   const { data } = useLangSwitcher();
 
-  const [dataNarrative, setDataNarrative] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-
   let defaultNarrative = router.query.id;
   // @ts-ignore
   const [title, setTitle] = useState<string | null>(defaultNarrative);
-  const [subNarrativeData, setSubNarrativeData] = useState(null);
   const [fakes, setFakes] = useState<number>(defaultFakesNumber);
 
-  useEffect(() => {
-    fetch(`https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataNarrative(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    let isMounted = true;
-    // async function getSubNarrative() {
-    //   // @ts-ignore
-    //   const dataFetched = await getSubNarrativeData(locale);
-    //   if (isMounted) {
-    //     setSubNarrativeData(dataFetched);
-    //   }
-    // }
-    // getSubNarrative();
-  }, [locale]);
+  const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
+  const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
 
   const renderNarratives =
     dataNarrative &&
@@ -88,7 +69,6 @@ export const FakesBarChart = () => {
           {dataNarrative && renderNarratives}
         </svg>
       </div>
-      {/* <div>{renderNarrativesMobie}</div> */}
     </motion.div>
   );
 };

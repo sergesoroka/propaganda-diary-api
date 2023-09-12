@@ -7,26 +7,21 @@ import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
 import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/router";
 
+import useSWR from "swr";
+import { fetcher } from "../../../lib/fetcher";
+
 const AllNarratives = () => {
-  const [dataNarratives, setDataNarratives] = useState(null);
+  // const [dataNarratives, setDataNarratives] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
   const router = useRouter();
   const { locale } = router;
 
   const { data } = useLangSwitcher();
-
-  useEffect(() => {
-    fetch(`https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataNarratives(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [locale]);
+  const { data: dataNarratives, error } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`,
+    fetcher
+  );
 
   // @ts-ignore
   const lastNarratives =

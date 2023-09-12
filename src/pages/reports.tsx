@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import YearsList from "@/components/YearsList/YearsList";
 import MonthsList from "@/components/MonthsList/MonthsList";
 import CountryList from "@/components/CountryList/CountryList";
-import { useEffect, useState } from "react";
-
-import getReportData from "../../lib/getReportData";
+import { useState } from "react";
 import { useRouter } from "next/router";
+
+import useSWR from "swr";
+
+import { fetcher } from "../../lib/fetcher";
 
 export default function MethodEn() {
   const router = useRouter();
@@ -17,22 +19,14 @@ export default function MethodEn() {
   const [currentMonth, setCurrentMonth] = useState(1);
   const [country, setCountry] = useState("Польща");
 
-  const [reportData, setReportData] = useState(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    async function getData() {
-      const dataFetched = await getReportData(locale);
-      if (isMounted) {
-        setReportData(dataFetched);
-      }
-    }
-    getData();
-  }, [locale]);
+  const { data, error } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
+    fetcher
+  );
 
   const reportDataRender =
-    reportData &&
-    reportData.data.map((item) => {
+    data &&
+    data.data.map((item) => {
       return (
         <div key={item.id} style={{ width: "100%" }}>
           <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>

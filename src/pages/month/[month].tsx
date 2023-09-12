@@ -1,23 +1,21 @@
 // @ts-nocheck
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-
+import stylesLocal from "../../components/SubNarratives/SubNarrative.module.css";
 import SpetialText from "../../../data/SpetialText";
 import BackArrow from "@/components/Icons/BackArrow";
 import styles from "../../styles/Home.module.css";
 import Timeline from "@/components/BarChart/Timeline";
 import CountryList from "@/components/CountryList/CountryList";
-import getSubNarrativeData from "../../../lib/getSubNarrativeData";
-import getMediaDataByMonth from "../../../lib/getMediaDataByMonth";
 
-import { format } from "date-fns";
-import { m } from "framer-motion";
+import useSWR from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
-const SubNarrativeList = dynamic(
-  () => import("@/components/SubNarratives/SubNarrativeList"),
+const SubNarrativeListByMonth = dynamic(
+  () => import("@/components/SubNarratives/SubNarrativeListByMonth"),
   {
     loading: () => <p style={{ margin: "0 auto" }}>Loading...</p>,
   }
@@ -30,41 +28,25 @@ export const MonthFakes = () => {
 
   const { locale } = router;
   const [current, setCurrent] = useState("2022");
-  const [country, setCountry] = useState("Польща");
+  const [country, setCountry] = useState("all");
   const [media, setMedia] = useState("all");
 
-  const [isLoading, setLoading] = useState(false);
-  const [subNarrativeData, setSubNarrativeData] = useState(null);
-  const [mediaData, setMediaData] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    let isMounted = true;
+  const { data: subNarrativeData, error: narrDataError } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=350`,
+    fetcher
+  );
 
-    async function getSubNarrative() {
-      // @ts-ignore
-      const dataFetched = await getSubNarrativeData(locale);
-      if (isMounted) {
-        setSubNarrativeData(dataFetched);
-      }
-    }
-    getSubNarrative();
+  const isCountry =
+    country && country != "all" ? "&country=" + `${country}` : "";
 
-    async function getMedia() {
-      const dataFetched = await getMediaDataByMonth(
-        locale,
-        month,
-        current,
-        country
-      );
-      if (isMounted) {
-        setMediaData(dataFetched);
-      }
-    }
-    getMedia();
-    return () => {
-      isMounted = false;
-    };
-  }, [locale, media, country, current, month]);
+  const isYear = current ? "&year=" + `${current}` : "";
+
+  const isMonth = month ? "&month=" + `${month}` : "";
+
+  const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isCountry}${isYear}${isMonth}`;
+  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
 
   const monthName =
     month === "01"
@@ -103,18 +85,31 @@ export const MonthFakes = () => {
       mediaByMonth.push(item);
     });
 
-  const subNarrativesRender =
+  const subNarrativRender =
     subNarrativeData &&
-    subNarrativeData.data.map((item) => {
-      return (
-        <SubNarrativeList
-          key={item.id}
-          subNarrativeTitle={item.title}
-          subNarrativeId={item.id}
-          media={mediaByMonth}
-        />
-      );
+    subNarrativeData.data.map((sub) => {
+      if (subNarrativId.includes(sub.id)) {
+        return (
+          <div key={sub.id}>
+            <h2
+              // style={{ cursor: "pointer" }}
+              onClick={() => setOpen(!open)}
+              className={
+                open ? stylesLocal.fakeHeadingActive : stylesLocal.fakeHeading
+              }
+            >
+              {sub.title}
+            </h2>
+            {mediaByMonth.map((media) => {
+              if (media.sub_narrative_id == sub.id) {
+                return <SubNarrativeListByMonth key={media.id} item={media} />;
+              }
+            })}
+          </div>
+        );
+      }
     });
+
   return (
     <>
       <Head>
@@ -168,8 +163,9 @@ export const MonthFakes = () => {
                 />
               </div>
             )}
-
-            {subNarrativesRender}
+            {subNarrativRender}
+            {/* {mediaRender} */}
+            {/* {subNarrativesRender} */}
           </div>
         </div>
       </div>

@@ -53,17 +53,19 @@ const Fake = ({
   const [dataMedia, setDataMedia] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetch(`https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataMedia(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [locale, open]);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}&per_page=5000`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDataMedia(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [locale, open]);
 
   // @ts-ignore
   const mediaListByMonth = data.map((item) => {

@@ -52,11 +52,12 @@ function Narrative({
         </h1>
       </div>
       {openNarrative && (
-        <FakeListForMedia
-          narrativeId={narrativeId}
-          media={media}
-          country={country}
-        />
+        <p>FakeList</p>
+        // <FakeListForMedia
+        //   narrativeId={narrativeId}
+        //   media={media}
+        //   country={country}
+        // />
       )}
       <hr
         style={{

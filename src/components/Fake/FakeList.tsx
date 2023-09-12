@@ -25,19 +25,19 @@ const FakeList = ({
   const [dataFakes, setDataFakes] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetch(
-      `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setDataFakes(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [locale]);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDataFakes(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [locale]);
 
   const fakeFiltered = useMemo(
     () =>

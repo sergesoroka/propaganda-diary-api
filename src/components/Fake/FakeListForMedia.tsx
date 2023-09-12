@@ -21,22 +21,22 @@ const FakeListForMedia = ({
   const router = useRouter();
   const { locale } = router;
 
-  useEffect(() => {
-    let isMounted = true;
+  // useEffect(() => {
+  //   let isMounted = true;
 
-    async function getSubNarrative() {
-      // @ts-ignore
-      const dataFetched = await getSubNarrativeData(locale);
-      if (isMounted) {
-        setSubNarrativeData(dataFetched);
-      }
-    }
-    getSubNarrative();
+  //   async function getSubNarrative() {
+  //     // @ts-ignore
+  //     const dataFetched = await getSubNarrativeData(locale);
+  //     if (isMounted) {
+  //       setSubNarrativeData(dataFetched);
+  //     }
+  //   }
+  //   getSubNarrative();
 
-    return () => {
-      isMounted = false;
-    };
-  }, [locale]);
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [locale]);
 
   // subNarrativeTitle,
   // subNarrativeId,

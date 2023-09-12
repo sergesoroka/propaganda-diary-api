@@ -1,14 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-
 import dynamic from "next/dynamic";
-
-const LatestNarratives = dynamic(
-  () => import("@/components/LatestNarratives/LatestNarratives"),
-  {
-    loading: () => <p>Loading...</p>,
-  }
-);
 
 const StatisticDisplay = dynamic(
   () => import("@/components/StatisticDisplay/StatisticDisplay"),
@@ -18,45 +10,30 @@ const StatisticDisplay = dynamic(
 );
 
 import { motion } from "framer-motion";
-
 import Link from "next/link";
 
 import Timeline from "@/components/BarChart/Timeline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FivePopNarratives from "@/components/LatestNarratives/FivePopNarratives";
 
-import getNarrativeCommonStatistic from "../../lib/getNarrativeCommonStatistic";
-import getSubNarrativeCommonStatistic from "../../lib/getSubNarrativeCommonStatistic";
-
-import { uniqueFakes, uniqueNarratives } from "../../utils/statisticCalculate";
+import useSWR from "swr";
+import { fetcher } from "../../lib/fetcher";
 
 export default function Home() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [current, setCurrent] = useState("2022");
-  const [narrativeStatisticData, setNarrativeStatisticData] = useState(0);
-  const [subNarrativeStatisticData, setSubNarrativeStatisticData] = useState(0);
 
-  useEffect(() => {
-    let isMounted = true;
-    async function getNarrativeStatistic() {
-      const satisticData = await getNarrativeCommonStatistic();
-      if (isMounted) {
-        setNarrativeStatisticData(satisticData);
-      }
-    }
-    getNarrativeStatistic();
+  const NARATIVES_COMMON_STATISTIC_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?lang=ua`;
+  const SUB_NARATIVES_COMMON_STATISTIC_URL = `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=ua`;
 
-    async function getSubNarrativeStatistic() {
-      const satisticData = await getSubNarrativeCommonStatistic();
-      if (isMounted) {
-        setSubNarrativeStatisticData(satisticData);
-      }
-    }
-    getSubNarrativeStatistic();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const { data: narrativeStatisticData, error } = useSWR(
+    NARATIVES_COMMON_STATISTIC_URL,
+    fetcher
+  );
+  const { data: subNarrativeStatisticData } = useSWR(
+    SUB_NARATIVES_COMMON_STATISTIC_URL,
+    fetcher
+  );
 
   return (
     <>

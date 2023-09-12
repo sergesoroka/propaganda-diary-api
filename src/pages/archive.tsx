@@ -31,7 +31,10 @@ const Archive = () => {
     statisticData.data.map((item, i) => {
       if (current == item.year) {
         return (
-          <Link key={i} href={"/month/" + item.month}>
+          <Link
+            key={i}
+            href={"/month/" + (item.month < 10 ? "0" + item.month : item.month)}
+          >
             <StatisticDisplay
               mode="disactive"
               month={item.month}

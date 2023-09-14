@@ -10,7 +10,7 @@ import { FakesBarChart } from "@/components/FakesBarChart/FakesBarChart";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
-import useSWR from "swr";
+import useSWR, { preload } from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 const SubNarrativeList = dynamic(
@@ -28,6 +28,9 @@ const NarrativePage = () => {
 
   const NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`;
   const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`;
+
+  preload(NARRATIVES_URL, fetcher);
+  preload(SUB_NARRATIVES_URL, fetcher);
 
   const { data: narrativeData, error } = useSWR(NARRATIVES_URL, fetcher);
   const { data: subNarrativeData } = useSWR(SUB_NARRATIVES_URL, fetcher);

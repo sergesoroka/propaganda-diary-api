@@ -28,11 +28,11 @@ export default function MethodEn() {
     data &&
     data.data.map((item) => {
       return (
-        <div key={item.id} style={{ width: "100%" }}>
+        <div key={item.id} style={{ width: "100%" }} className="reports">
           <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>
             {item.title}
           </h1>
-          <p dangerouslySetInnerHTML={{ __html: item.content }} />
+          <div dangerouslySetInnerHTML={{ __html: item.content }} />
         </div>
       );
     });
@@ -67,7 +67,8 @@ export default function MethodEn() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, type: "tween" }}
-        className={styles.mainLeft}
+        className=""
+        style={{ width: "70%", margin: "0 auto" }}
       >
         {reportDataRender}
       </motion.div>

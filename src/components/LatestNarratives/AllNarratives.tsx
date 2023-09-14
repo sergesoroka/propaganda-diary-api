@@ -7,7 +7,7 @@ import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
 import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/router";
 
-import useSWR from "swr";
+import useSWR, { preload } from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 const AllNarratives = () => {
@@ -18,6 +18,12 @@ const AllNarratives = () => {
   const { locale } = router;
 
   const { data } = useLangSwitcher();
+
+  preload(
+    `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`,
+    fetcher
+  );
+
   const { data: dataNarratives, error } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`,
     fetcher

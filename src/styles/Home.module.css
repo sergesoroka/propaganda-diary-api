@@ -24,6 +24,7 @@
   align-items: flex-start;
   padding: 2rem 18rem;
   min-height: 100vh;
+  background-color: #fff;
 }
 .mainLeft p a {
   color: #ff2618 !important;
@@ -422,6 +423,7 @@
   .mainLeft,
   .main {
     padding: 1rem;
+    background-color: #fff;
   }
   .discription {
     margin: 0 1rem 0 1rem;

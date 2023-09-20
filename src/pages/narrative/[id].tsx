@@ -105,8 +105,6 @@ const NarrativePage = () => {
           <p className={styles.caption}>
             <SpetialText name={"Tags"} />:
           </p>
-
-          {/* <div className={styles.narrativeTag}>{tagsList}</div> */}
         </div>
 
         <hr

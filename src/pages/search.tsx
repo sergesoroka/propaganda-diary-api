@@ -17,8 +17,8 @@ const search = () => {
         transition={{ duration: 0.6, type: "tween" }}
         className={styles.mainLeft}
       >
-        <p>search</p>
-        {/* <Search /> */}
+       
+        <Search />
       </motion.div>
     </>
   );

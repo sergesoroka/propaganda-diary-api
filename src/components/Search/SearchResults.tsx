@@ -1,31 +1,22 @@
-import Fake from "../Fake/Fake";
+// @ts-nocheck
+import styles from "../../components/SubNarratives/SubNarrative.module.css";
+import SubNarrativeBySearch from "../SubNarratives/SubNarrativeBySearch";
 
-import styles from '../../styles/Home.module.css'
-
-const SearchResults = ({
-  handleClick,
-  suggestionIndex,
-  suggestions,
-}: {
-  handleClick: () => void;
-  suggestionIndex: number;
-  suggestions: never[];
-}) => {
-  /* @ts-ignore */
-  const uniqueSearch: string[] = [];
-  /* @ts-ignore */
-  const renderedSearchData = suggestions.map((item, i) => {
-    /* @ts-ignore */
-    if (!uniqueSearch.includes(item)) {
-      uniqueSearch.push(item);
-
-      return  <Fake fake={item} key={item} />;
-    }
+const SearchResults = ({ suggestions }: { suggestions: never[] }) => {
+  const renderedSearchData = suggestions.map((title, i) => {
+    return (
+      <div key={i}>
+        <SubNarrativeBySearch title={title} />
+      </div>
+    );
   });
 
-
-
-  return <div><span  className={styles.caption}>Search Results: </span>{renderedSearchData}</div>;
+  return (
+    <div>
+      <span className={styles.caption}>Search Results: </span>
+      {renderedSearchData}
+    </div>
+  );
 };
 
 export default SearchResults;

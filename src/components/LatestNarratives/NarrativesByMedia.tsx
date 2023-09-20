@@ -1,14 +1,10 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
 import styles from "./LatestNarratives.module.css";
-import SpetialText from "../../../data/SpetialText";
 
-import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
-import Narrative from "./Narrative/Narrative";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import getNarrativeData from "../../../lib/getNarrativeData";
-import getMediaDataByCountry from "../../../lib/getMediaDataByCountry";
+import Narrative from "./Narrative/Narrative";
 
 const NarrativesByMedia = ({
   country,
@@ -19,12 +15,9 @@ const NarrativesByMedia = ({
   media: string;
   setMedia: (media: string) => {};
 }) => {
-  // const { data } = useLangSwitcher();
-
   const router = useRouter();
   const { locale } = router;
   const [narrativeData, setNarrativeData] = useState(null);
-  // const [mediaData, setMediaData] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -37,19 +30,10 @@ const NarrativesByMedia = ({
     }
     getNarrative();
 
-    // async function getMedia() {
-    //   const dataFetched = await getMediaDataByCountry(locale, country, media);
-    //   if (isMounted) {
-    //     setMediaData(dataFetched);
-    //   }
-    // }
-    // getMedia();
     return () => {
       isMounted = false;
     };
   }, [locale, country, media]);
-
-  // console.log(locale, country, media);
 
   // @ts-ignore
   const NarrativesRender =

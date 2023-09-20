@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRouter } from "next/router";
 import styles from "./Search.module.css";
 import useSearchAutoComplete from "./searchHook";
@@ -8,7 +9,7 @@ const Search = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const { locale } = router;
- 
+
   const {
     handleChange,
     handleClick,
@@ -17,6 +18,7 @@ const Search = () => {
     suggestionsActive,
     suggestionIndex,
     suggestions,
+    searchResult,
   } = useSearchAutoComplete();
 
   const placeholdrer =

@@ -92,7 +92,6 @@ export const MonthFakes = () => {
         return (
           <div key={sub.id}>
             <h2
-              // style={{ cursor: "pointer" }}
               onClick={() => setOpen(!open)}
               className={
                 open ? stylesLocal.fakeHeadingActive : stylesLocal.fakeHeading

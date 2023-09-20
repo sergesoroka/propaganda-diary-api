@@ -1,32 +1,38 @@
 import { useState } from "react";
-import dataNew from "../../../data/dataEn.json";
+import { useRouter } from "next/router";
 
-import useLangSwitcher from '../../../utils/i18n/useLangSwitcher'
+import useSWR, { preload } from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
 const useSearchAutoComplete = () => {
   const [suggestions, setSuggestions] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
   const [suggestionsActive, setSuggestionsActive] = useState(false);
   const [value, setValue] = useState("");
 
-  const { data } = useLangSwitcher();
+  const router = useRouter();
+  const { locale } = router;
 
+  const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?search=${value}&lang=${locale}`;
+  const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
 
   const handleChange = (e) => {
     const query = e.target.value.toLowerCase();
     setValue(query);
-    if (query.length > 1) {
-      const filterSuggestions = data
-        .map((item) => item.Fake)
-        .filter((suggestion) => suggestion.toLowerCase().indexOf(query) > -1);
+    if (query.length > 1 && searchData) {
+      const arrayFromObjectData = Object.keys(searchData.data);
 
-      const filterSuggestionsSubTheme = data
-        .map((item) => item.ENG_Translation)
-        .filter((suggestion) => suggestion.toLowerCase().indexOf(query) > -1);
-      setSuggestions([
-        ...filterSuggestions,
-        // ...filterSuggestionsSubTheme,
-      ]);
+      const filterSuggestions =
+        arrayFromObjectData &&
+        arrayFromObjectData.map((item) => {
+          // setSearchResult((prev) => [...prev, searchData.data[item]]);
+          searchResult.push(searchData.data[item]);
+          return item;
+        });
+      // .filter((suggestion) => suggestion.toLowerCase().indexOf(query) > -1);
+
+      setSuggestions([...filterSuggestions]);
       setSuggestionsActive(true);
     } else {
       setSuggestionsActive(false);
@@ -52,6 +58,7 @@ const useSearchAutoComplete = () => {
     handleClick,
     handleClear,
     suggestions,
+    searchResult,
   };
 };
 

@@ -14,7 +14,7 @@ let defaultFakesNumber = 5;
 
 export const FakesBarChart = () => {
   const router = useRouter();
-  const { locale } = router;
+  const { locale, pathname } = router;
   const { data } = useLangSwitcher();
 
   let defaultNarrative = router.query.id;
@@ -63,7 +63,8 @@ export const FakesBarChart = () => {
     >
       <div>
         <p className={styles.fakesNumber}>
-          <SpetialText name={"Fakes"} />: {fakes}
+          <SpetialText name={"Fakes"} />:{" "}
+          {pathname === "/narratives" ? dataNarrative.data.length : fakes}
         </p>
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}

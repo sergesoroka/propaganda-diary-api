@@ -44,23 +44,50 @@ a {
 
 .reports,
 .reports p,
+.reports p > span,
 .reports p p {
-  font-size: 18px;
-  line-height: 32px;
+  font-family: var(--font) !important;
+  font-size: 16px !important;
+  line-height: 32px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+.reports h1 {
+  font-family: var(--font) !important;
+  font-size: 34px;
+  color: #676767;
+  line-height: 3rem;
+  padding: 0 5rem !important;
 }
 
 .single-post-lead {
+  font-family: var(--font) !important;
   margin: 2rem 0;
   color: #676767;
 }
 
 .reports h3,
+.reports h3 span,
 .reports iframe,
 .reports img {
+  font-family: var(--font) !important;
+  font-weight: 600 !important;
   margin: 2rem 0 1rem 0;
 }
 
 .wp-image-128110 {
+  font-family: var(--font) !important;
   width: 100%;
   height: 100%;
+}
+
+.single-post-lead {
+  font-family: var(--font) !important;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+}
+.reports p span,
+.reports p span img {
+  width: 100% !important;
+  height: auto !important;
 }

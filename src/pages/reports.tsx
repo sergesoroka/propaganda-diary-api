@@ -50,8 +50,8 @@ export default function MethodEn() {
         transition={{ duration: 0.6, type: "tween" }}
         className={styles.main}
       >
-        <YearsList current={current} setCurrent={setCurrent} />
-        <MonthsList current={currentMonth} setCurrent={setCurrentMonth} />
+        {/* <YearsList current={current} setCurrent={setCurrent} />
+        <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
         <hr
           style={{
             height: "2px",

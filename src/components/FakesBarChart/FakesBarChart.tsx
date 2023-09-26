@@ -10,8 +10,6 @@ import SpetialText from "../../../data/SpetialText";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
-let defaultFakesNumber = 5;
-
 export const FakesBarChart = () => {
   const router = useRouter();
   const { locale, pathname } = router;
@@ -20,7 +18,7 @@ export const FakesBarChart = () => {
   let defaultNarrative = router.query.id;
   // @ts-ignore
   const [title, setTitle] = useState<string | null>(defaultNarrative);
-  const [fakes, setFakes] = useState<number>(defaultFakesNumber);
+  const [fakes, setFakes] = useState<number>(0);
 
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);

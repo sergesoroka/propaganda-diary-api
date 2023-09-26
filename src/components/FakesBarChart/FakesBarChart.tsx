@@ -64,7 +64,9 @@ export const FakesBarChart = () => {
       <div>
         <p className={styles.fakesNumber}>
           <SpetialText name={"Fakes"} />:{" "}
-          {pathname === "/narratives" ? dataNarrative.data.length : fakes}
+          {pathname === "/narratives"
+            ? dataNarrative && dataNarrative.data.length
+            : fakes}
         </p>
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}

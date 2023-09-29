@@ -1,5 +1,6 @@
 // @ts-nocheck
 import Head from "next/head";
+import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
 import YearsList from "@/components/YearsList/YearsList";
@@ -18,11 +19,14 @@ export default function MethodEn() {
   const [current, setCurrent] = useState("2022");
   const [currentMonth, setCurrentMonth] = useState(1);
   const [country, setCountry] = useState("Польща");
+  const [media, setMedia] = useState("all");
 
   const { data, error } = useSWR(
-    `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
+    `https://vox-dashboard.ra-devs.tech/api/pages?lang=ua`,
     fetcher
   );
+
+  console.log(country);
 
   const reportDataRender =
     data &&
@@ -31,8 +35,31 @@ export default function MethodEn() {
         <div key={item.id} style={{ width: "100%" }} className="reports">
           <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>
             {item.title}
-          </h1>
-          <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          </h1>{" "}
+          <p className={styles.reportsAuthor}>{item.author}</p>
+          <p className={styles.reportsLead}>{item.lead}</p>
+          <Image
+            src="https://voxukraine.org/wp-content/uploads/2023/08/Propaganda-diary.png"
+            width={922}
+            height={518}
+            alt="Picture of the author"
+          />
+          <p className={styles.reportsDisclaimer}>{item.disclaimer}</p>
+          <CountryList
+            country={country}
+            setCountry={setCountry}
+            setMedia={setMedia}
+          />
+          <hr
+            style={{
+              height: "2px",
+              background: "#FF2618",
+              border: "none",
+              width: "100%",
+              margin: "2rem 0",
+            }}
+          />
+          <p className={styles.reportsContent}>{item.content[country]}</p>
         </div>
       );
     });
@@ -50,8 +77,9 @@ export default function MethodEn() {
         transition={{ duration: 0.6, type: "tween" }}
         className={styles.main}
       >
-        {/* <YearsList current={current} setCurrent={setCurrent} />
-        <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
+        <YearsList current={current} setCurrent={setCurrent} />
+        <MonthsList current={currentMonth} setCurrent={setCurrentMonth} />
+
         <hr
           style={{
             height: "2px",
@@ -61,7 +89,6 @@ export default function MethodEn() {
             margin: "2rem 0",
           }}
         />
-        {/* <CountryList country={country} setCountry={setCountry} /> */}
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: -20 }}

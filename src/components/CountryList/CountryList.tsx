@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRouter } from "next/router";
 import styles from "./CountryList.module.css";
 
@@ -8,7 +9,7 @@ function CountryList({
 }: {
   setCountry: (country: string | boolean) => {};
   country: string;
-  setMedia: (media: string) => {};
+  setMedia?: (media: string) => {};
 }) {
   const router = useRouter();
   const { locale } = router;

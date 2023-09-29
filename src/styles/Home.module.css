@@ -541,6 +541,23 @@
   }
 }
 
+.reportsAuthor {
+  font-weight: 900 !important;
+  text-align: center;
+  margin: 2rem 0;
+}
+.reportsLead {
+  font-weight: 900 !important;
+}
+.reportsDisclaimer {
+  color: #727272;
+  border-left: 5px solid #ff2618;
+  padding-left: 1rem;
+  margin-bottom: 4rem;
+}
+.reportsContent {
+  margin: 4rem 0;
+}
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {

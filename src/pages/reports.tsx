@@ -22,7 +22,7 @@ export default function MethodEn() {
   const [media, setMedia] = useState("all");
 
   const { data, error } = useSWR(
-    `https://vox-dashboard.ra-devs.tech/api/pages?lang=ua`,
+    `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
     fetcher
   );
 
@@ -76,6 +76,7 @@ export default function MethodEn() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, type: "tween" }}
         className={styles.main}
+        style={{ width: "100%", margin: "0 auto" }}
       >
         <YearsList current={current} setCurrent={setCurrent} />
         <MonthsList current={currentMonth} setCurrent={setCurrentMonth} />

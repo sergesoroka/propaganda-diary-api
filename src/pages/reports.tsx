@@ -26,8 +26,6 @@ export default function MethodEn() {
     fetcher
   );
 
-  console.log(country);
-
   const reportDataRender =
     data &&
     data.data.map((item) => {

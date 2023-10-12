@@ -1,21 +1,34 @@
+// @ts-nocheck
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-import AboutUa from "@/components/About/AboutUa";
-import AboutRu from "@/components/About/AboutRu";
-import AboutIt from "@/components/About/AboutIt";
-import AboutDe from "@/components/About/AboutDe";
-import AboutEn from "@/components/About/AboutEn";
-import AboutPl from "@/components/About/AboutPl";
-import AboutCs from "@/components/About/AboutCs";
-import AboutSk from "@/components/About/AboutSk";
-import AboutHu from "@/components/About/AboutHu";
+import useSWR from "swr";
+
+import { fetcher } from "../../lib/fetcher";
 
 export default function About() {
   const router = useRouter();
   const { locale } = router;
+
+  const { data, error } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/about?lang=${locale}`,
+    fetcher
+  );
+
+  const aboutRender =
+    data &&
+    data.data.map((item, i) => {
+      return (
+        <>
+          <h1 key={i}>{item.title}</h1>
+          <p style={{ lineHeight: "1.6rem", marginBottom: "1rem" }}>
+            {item.content}
+          </p>
+        </>
+      );
+    });
 
   return (
     <div>
@@ -30,15 +43,7 @@ export default function About() {
         transition={{ duration: 0.6, type: "tween" }}
         className={styles.mainLeft}
       >
-        {locale === "ua" && <AboutUa />}
-        {locale === "it" && <AboutIt />}
-        {locale === "ru" && <AboutRu />}
-        {locale === "de" && <AboutDe />}
-        {locale === "en" && <AboutEn />}
-        {locale === "pl" && <AboutPl />}
-        {locale === "cs" && <AboutCs />}
-        {locale === "sk" && <AboutSk />}
-        {locale === "hu" && <AboutHu />}
+        {aboutRender}
       </motion.div>
     </div>
   );

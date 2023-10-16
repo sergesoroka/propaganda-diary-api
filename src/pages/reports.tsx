@@ -26,40 +26,46 @@ export default function MethodEn() {
     fetcher
   );
 
+  // 2023-07-31
+
   const reportDataRender =
     data &&
     data.data.map((item) => {
-      return (
-        <div key={item.id} style={{ width: "100%" }} className="reports">
-          <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>
-            {item.title}
-          </h1>{" "}
-          <p className={styles.reportsAuthor}>{item.author}</p>
-          <p className={styles.reportsLead}>{item.lead}</p>
-          <Image
-            src="https://voxukraine.org/wp-content/uploads/2023/08/Propaganda-diary.png"
-            width={922}
-            height={518}
-            alt="Picture of the author"
-          />
-          <p className={styles.reportsDisclaimer}>{item.disclaimer}</p>
-          <CountryList
-            country={country}
-            setCountry={setCountry}
-            setMedia={setMedia}
-          />
-          <hr
-            style={{
-              height: "2px",
-              background: "#FF2618",
-              border: "none",
-              width: "100%",
-              margin: "2rem 0",
-            }}
-          />
-          <p className={styles.reportsContent}>{item.content[country]}</p>
-        </div>
-      );
+      if (current < item.date) {
+        console.log(item.date, `${current}-01-01`);
+
+        return (
+          <div key={item.id} style={{ width: "100%" }} className="reports">
+            <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>
+              {item.title}
+            </h1>{" "}
+            <p className={styles.reportsAuthor}>{item.author}</p>
+            <p className={styles.reportsLead}>{item.lead}</p>
+            <Image
+              src="https://voxukraine.org/wp-content/uploads/2023/08/Propaganda-diary.png"
+              width={922}
+              height={518}
+              alt="Picture of the author"
+            />
+            <p className={styles.reportsDisclaimer}>{item.disclaimer}</p>
+            <CountryList
+              country={country}
+              setCountry={setCountry}
+              setMedia={setMedia}
+            />
+            <hr
+              style={{
+                height: "2px",
+                background: "#FF2618",
+                border: "none",
+                width: "100%",
+                margin: "2rem 0",
+              }}
+            />
+            <p className={styles.reportsContent}>{item.content[country]}</p>
+          </div>
+        );
+      }
     });
 
   return (
@@ -77,7 +83,7 @@ export default function MethodEn() {
         style={{ width: "100%", margin: "0 auto" }}
       >
         <YearsList current={current} setCurrent={setCurrent} />
-        <MonthsList current={currentMonth} setCurrent={setCurrentMonth} />
+        {/* <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
 
         <hr
           style={{

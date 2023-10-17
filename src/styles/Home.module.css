@@ -419,6 +419,11 @@
     padding: 0 1rem;
     display: none;
   }
+  .reportsLayout {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+  }
 
   .mainLeft,
   .main {
@@ -539,6 +544,12 @@
     );
     z-index: 1;
   }
+}
+
+.reportsLayout {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
 }
 
 .reportsAuthor {

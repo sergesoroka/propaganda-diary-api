@@ -59,7 +59,12 @@ export default function MethodEn() {
         return (
           <Link key={i} href={{ pathname: `/report/${item.date}` }}>
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                marginBottom: "2rem",
+              }}
             >
               <ReportIcon />
               {format(new Date(item.date), "LLLL yyyy", {
@@ -115,17 +120,7 @@ export default function MethodEn() {
         className=""
         style={{ width: "70%", margin: "0 auto", minHeight: "100vh" }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "start",
-            flexWrap: "wrap",
-            paddingBottom: "3rem",
-          }}
-        >
-          {reportDataRender}
-        </div>
+        <div className={styles.reportsLayout}>{reportDataRender}</div>
       </motion.div>
     </div>
   );

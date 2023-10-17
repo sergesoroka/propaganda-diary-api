@@ -11,10 +11,32 @@ import { fetcher } from "../../../lib/fetcher";
 import styles from "../../styles/Home.module.css";
 
 function ReportPage() {
-  const [country, setCountry] = useState("");
   const [media, setMedia] = useState("all");
   const router = useRouter();
   const { locale } = router;
+
+  const countryLocale =
+    locale == "ua"
+      ? "Польща"
+      : locale == "de"
+      ? "Polen"
+      : locale == "pl"
+      ? "Polska"
+      : locale == "en"
+      ? "Poland"
+      : locale == "sk"
+      ? "Poľsko"
+      : locale == "it"
+      ? "Polonia"
+      : locale == "hu"
+      ? "Lengyelország"
+      : locale == "cs"
+      ? "Polsko"
+      : locale == "ru"
+      ? "Польща"
+      : "Польща";
+
+  const [country, setCountry] = useState(countryLocale);
 
   const { data, error } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,

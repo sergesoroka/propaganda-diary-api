@@ -98,13 +98,13 @@ const NarrativePage = () => {
             <BackArrow />
           </Link>
         </div>
-        <div>
+        <div style={{ marginBottom: "2rem" }}>
           <>{narrativeDescription}</>
         </div>
         <div className={styles.narrativeTags}>
-          <p className={styles.caption}>
+          {/* <p className={styles.caption}>
             <SpetialText name={"Tags"} />:
-          </p>
+          </p> */}
         </div>
 
         <hr

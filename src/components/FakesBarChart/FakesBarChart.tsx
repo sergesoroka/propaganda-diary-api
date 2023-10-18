@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import Link from "next/link";
@@ -23,18 +24,23 @@ export const FakesBarChart = () => {
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
 
+  const { data: dataSubNarratives } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`,
+    fetcher
+  );
+
   const renderNarratives =
     dataNarrative &&
     // @ts-ignore
     dataNarrative.data.map((item, i) => {
       const uniqueFakes: string[] = [];
 
-      // @ts-ignore
-      data.map((fake) => {
-        if (!uniqueFakes.includes(fake.Fake) && fake.Narrative === item.title) {
-          uniqueFakes.push(fake.Fake);
-        }
-      });
+      dataSubNarratives &&
+        dataSubNarratives.data.map((fake) => {
+          if (item.id == fake.narrative_id) {
+            uniqueFakes.push(fake.narrative_id);
+          }
+        });
       return (
         <Link key={i} href={{ pathname: `/narrative/${item.id}` }}>
           <rect
@@ -61,10 +67,7 @@ export const FakesBarChart = () => {
     >
       <div>
         <p className={styles.fakesNumber}>
-          <SpetialText name={"Fakes"} />:{" "}
-          {pathname === "/narratives"
-            ? dataNarrative && dataNarrative.data.length
-            : fakes}
+          <SpetialText name={"Fakes"} />: {fakes}
         </p>
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}

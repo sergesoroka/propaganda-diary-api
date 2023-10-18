@@ -383,11 +383,15 @@
 .aboutParag p {
   margin: 1rem 0 !important;
   font-size: 1rem !important;
-  line-height: 2rem !important;
+  line-height: 1.8rem !important;
 }
 .aboutParag ul li {
   font-size: 0.9rem !important;
   margin-bottom: 0.6rem !important;
+}
+
+.aboutParag h2 {
+  margin-top: 3rem !important;
 }
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

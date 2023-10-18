@@ -35,19 +35,15 @@ const AllNarratives = () => {
     `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`,
     fetcher
   );
-  const uniqueFakes: string[] = [];
-
-  console.log(uniqueFakes.length);
 
   const lastNarratives =
     dataNarratives &&
     dataNarratives.data.map((narrative, i) => {
+      const uniqueFakes: string[] = [];
+
       dataSubNarratives &&
         dataSubNarratives.data.map((fake) => {
-          if (
-            !uniqueFakes.includes(fake.narrative_id) &&
-            narrative.id == fake.narrative_id
-          ) {
+          if (narrative.id == fake.narrative_id) {
             uniqueFakes.push(fake.narrative_id);
           }
         });
@@ -61,7 +57,7 @@ const AllNarratives = () => {
           >
             <div className={styles.narrativeItem}>
               <p className={styles.fakesNumber}>
-                <SpetialText name={"Fakes"} />:
+                <SpetialText name={"Fakes"} />:{" "}
                 {uniqueFakes.length > 0 && uniqueFakes.length}
               </p>
               <Link href={{ pathname: `/narrative/${narrative.id}` }}>

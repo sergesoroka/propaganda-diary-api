@@ -68,7 +68,7 @@ export const FakesBarChart = () => {
       <div>
         {pathname !== "/narratives" ? (
           <p className={styles.fakesNumber}>
-            <SpetialText name={"Fakes"} />: {fakes && fakes}
+            <SpetialText name={"Fakes"} />: {fakes}
           </p>
         ) : null}
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>

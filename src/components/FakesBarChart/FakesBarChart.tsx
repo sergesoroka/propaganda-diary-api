@@ -19,7 +19,7 @@ export const FakesBarChart = () => {
   let defaultNarrative = router.query.id;
   // @ts-ignore
   const [title, setTitle] = useState<string | null>(defaultNarrative);
-  const [fakes, setFakes] = useState(240);
+  const [fakes, setFakes] = useState(null);
 
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
@@ -66,9 +66,11 @@ export const FakesBarChart = () => {
       transition={{ duration: 0.3, type: "tween" }}
     >
       <div>
-        <p className={styles.fakesNumber}>
-          <SpetialText name={"Fakes"} />: {fakes}
-        </p>
+        {pathname !== "/narratives" ? (
+          <p className={styles.fakesNumber}>
+            <SpetialText name={"Fakes"} />: {fakes && fakes}
+          </p>
+        ) : null}
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}
         </svg>

@@ -380,7 +380,11 @@
 .narrativeContent {
   padding: 2rem 14rem;
 }
-
+.aboutParag p {
+  margin: 1rem 0 !important;
+  font-size: 1rem !important;
+  line-height: 2rem !important;
+}
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

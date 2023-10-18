@@ -24,6 +24,7 @@ export default function About() {
         <>
           <h1 key={i}>{item.title}</h1>
           <p
+            className={styles.aboutParag}
             style={{ lineHeight: "1.6rem", marginBottom: "1rem" }}
             dangerouslySetInnerHTML={{ __html: item.content }}
           />

@@ -16,11 +16,6 @@ export const FakesBarChart = () => {
   const { locale, pathname } = router;
   const { data } = useLangSwitcher();
 
-  let defaultNarrative = router.query.id;
-  // @ts-ignore
-  const [title, setTitle] = useState<string | null>(defaultNarrative);
-  // const [fakes, setFakes] = useState(null);
-
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
 
@@ -32,16 +27,16 @@ export const FakesBarChart = () => {
   const renderNarratives =
     dataNarrative &&
     // @ts-ignore
+
     dataNarrative.data.map((item, i) => {
-      dataNarrative.data.map((item, i) => {
-        const uniqueFakes: string[] = [];
-  
-        // @ts-ignore
-        data.map((fake) => {
-          if (!uniqueFakes.includes(fake.Fake) && fake.Narrative === item.title) {
-            uniqueFakes.push(fake.Fake);
-          }
-        });
+      const uniqueFakes: string[] = [];
+
+      // @ts-ignore
+      data.map((fake) => {
+        if (!uniqueFakes.includes(fake.Fake) && fake.Narrative === item.title) {
+          uniqueFakes.push(fake.Fake);
+        }
+      });
       return (
         <Link key={i} href={{ pathname: `/narrative/${item.id}` }}>
           <rect

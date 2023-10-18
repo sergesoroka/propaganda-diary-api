@@ -41,12 +41,12 @@ const AllNarratives = () => {
     dataNarratives.data.map((narrative, i) => {
       const uniqueFakes: string[] = [];
 
-      dataSubNarratives &&
-        dataSubNarratives.data.map((fake) => {
-          if (narrative.id == fake.narrative_id) {
-            uniqueFakes.push(fake.narrative_id);
-          }
-        });
+      // dataSubNarratives &&
+      //   dataSubNarratives.data.map((fake) => {
+      //     if (narrative.id == fake.narrative_id) {
+      //       uniqueFakes.push(fake.narrative_id);
+      //     }
+      //   });
 
       return (
         <Suspense fallback="Loading..." key={i}>
@@ -58,7 +58,7 @@ const AllNarratives = () => {
             <div className={styles.narrativeItem}>
               <p className={styles.fakesNumber}>
                 <SpetialText name={"Fakes"} />:{" "}
-                {uniqueFakes.length > 0 && uniqueFakes.length}
+                {/* {uniqueFakes.length > 0 && uniqueFakes.length} */}
               </p>
               <Link href={{ pathname: `/narrative/${narrative.id}` }}>
                 <h1 className={styles.narrativeHeading}>{narrative.title}</h1>

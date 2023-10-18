@@ -46,7 +46,7 @@ export const FakesBarChart = () => {
             x={i * 35}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              setTitle(item.title);
+              // setTitle(item.title);
               // @ts-ignore
               // setFakes(uniqueFakes.length);
             }}

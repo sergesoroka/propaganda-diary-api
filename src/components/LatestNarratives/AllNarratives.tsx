@@ -13,6 +13,7 @@ import { fetcher } from "../../../lib/fetcher";
 const AllNarratives = () => {
   // const [dataNarratives, setDataNarratives] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [fakesNumber, setFakesNumber] = useState(0);
 
   const router = useRouter();
   const { locale } = router;
@@ -28,6 +29,8 @@ const AllNarratives = () => {
     `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`,
     fetcher
   );
+
+  console.log(dataNarratives);
 
   // @ts-ignore
   const lastNarratives =
@@ -55,7 +58,8 @@ const AllNarratives = () => {
           >
             <div className={styles.narrativeItem}>
               <p className={styles.fakesNumber}>
-                <SpetialText name={"Fakes"} />: {uniqueFakes.length}
+                <SpetialText name={"Fakes"} />:{" "}
+                {uniqueFakes.length > 0 && uniqueFakes.length}
               </p>
               <Link href={{ pathname: `/narrative/${narrative.id}` }}>
                 <h1 className={styles.narrativeHeading}>{narrative.title}</h1>

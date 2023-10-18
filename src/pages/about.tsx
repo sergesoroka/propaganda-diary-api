@@ -23,9 +23,10 @@ export default function About() {
       return (
         <>
           <h1 key={i}>{item.title}</h1>
-          <p style={{ lineHeight: "1.6rem", marginBottom: "1rem" }}>
-            {item.content}
-          </p>
+          <p
+            style={{ lineHeight: "1.6rem", marginBottom: "1rem" }}
+            dangerouslySetInnerHTML={{ __html: item.content }}
+          />
         </>
       );
     });

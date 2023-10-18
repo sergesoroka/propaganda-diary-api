@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import { useRouter } from "next/router";
 import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
-import SpetialText from "../../../data/SpetialText";
+// import SpetialText from "../../../data/SpetialText";
 
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
@@ -24,21 +24,22 @@ export const FakesBarChart = () => {
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
 
-  const { data: dataSubNarratives } = useSWR(
-    `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`,
-    fetcher
-  );
+  // const { data: dataSubNarratives } = useSWR(
+  //   `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`,
+  //   fetcher
+  // );
 
   const renderNarratives =
     dataNarrative &&
     // @ts-ignore
     dataNarrative.data.map((item, i) => {
-      const uniqueFakes: string[] = [];
-
-      dataSubNarratives &&
-        dataSubNarratives.data.map((fake) => {
-          if (item.id == fake.narrative_id) {
-            uniqueFakes.push(fake.narrative_id);
+      dataNarrative.data.map((item, i) => {
+        const uniqueFakes: string[] = [];
+  
+        // @ts-ignore
+        data.map((fake) => {
+          if (!uniqueFakes.includes(fake.Fake) && fake.Narrative === item.title) {
+            uniqueFakes.push(fake.Fake);
           }
         });
       return (

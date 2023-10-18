@@ -19,7 +19,7 @@ export const FakesBarChart = () => {
   let defaultNarrative = router.query.id;
   // @ts-ignore
   const [title, setTitle] = useState<string | null>(defaultNarrative);
-  const [fakes, setFakes] = useState(null);
+  // const [fakes, setFakes] = useState(null);
 
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
@@ -52,7 +52,7 @@ export const FakesBarChart = () => {
             onClick={() => {
               setTitle(item.title);
               // @ts-ignore
-              setFakes(uniqueFakes.length);
+              // setFakes(uniqueFakes.length);
             }}
           />
         </Link>
@@ -66,11 +66,6 @@ export const FakesBarChart = () => {
       transition={{ duration: 0.3, type: "tween" }}
     >
       <div>
-        {pathname !== "/narratives" ? (
-          <p className={styles.fakesNumber}>
-            <SpetialText name={"Fakes"} />: {fakes}
-          </p>
-        ) : null}
         <svg width="950" height="200" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}
         </svg>

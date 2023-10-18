@@ -64,10 +64,13 @@ const NarrativePage = () => {
       }
     });
 
+  let count = 0;
+
   const subNarrativesRender =
     subNarrativeData &&
     subNarrativeData.data.map((sub) => {
       if (sub.narrative_id == id) {
+        count++;
         return (
           <div key={sub.id}>
             <SubNarrativeList
@@ -89,6 +92,9 @@ const NarrativePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.barChartWrap}>
+        <p className={styles.fakesNumber}>
+          <SpetialText name={"Fakes"} />: {count}
+        </p>
         <FakesBarChart />
       </div>
 

@@ -4,42 +4,30 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 
-import useSWR from "swr";
+import useSWR, { preload } from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 import styles from "../../components/Fake/Fake.module.css";
+import Link from "next/link";
 
 export default function SubNarrativeList({
   subNarrativeTitle,
-  subNarrId,
   narrativeId,
-  month,
   media,
-  country,
-  year,
-  tag,
 }) {
   const router = useRouter();
   const { locale } = router;
 
   const [open, setOpen] = useState(false);
-  const [subNarrativeId, setSubNarrativeId] = useState(null);
 
-  const issubNarrativeId = subNarrativeId
-    ? "&sub_narrative_id=" + `${subNarrativeId}`
-    : "";
+  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?media=${media}&lang=${locale}`;
 
-  const isCountry =
-    country && country != "all" ? "&country=" + `${country}` : "";
+  preload(FAKES_BY_MEDIA_URL, fetcher);
 
-  const isYear = year ? "&year=" + `${year}` : "";
-
-  const isMonth = month ? "&month=" + `${month}` : "";
-
-  const isNarrativeId = narrativeId ? "&narrative_id=" + `${narrativeId}` : "";
-
-  const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isNarrativeId}${issubNarrativeId}${isCountry}${isYear}${isMonth}`;
-  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
+  const { data: fakesByMediaData, isLoading } = useSWR(
+    FAKES_BY_MEDIA_URL,
+    fetcher
+  );
 
   const dataLocale =
     locale == "ua"
@@ -63,11 +51,13 @@ export default function SubNarrativeList({
       : uk;
 
   const mediaList =
-    mediaData &&
-    mediaData.data.map((item, i) => {
+    fakesByMediaData[subNarrativeTitle] &&
+    fakesByMediaData[subNarrativeTitle].map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <p className={styles.mediaName}>{item.media_name}</p>
+          <Link href={item.link}>
+            <p className={styles.mediaName}>{item.media_name}</p>
+          </Link>
           <p className={styles.mediaCountry}>{item.country}</p>
           <p className={styles.mediaDate}>
             {format(new Date(item.date), "d MMMM yyyy", {
@@ -83,7 +73,6 @@ export default function SubNarrativeList({
       <div
         onClick={() => {
           setOpen(!open);
-          setSubNarrativeId(subNarrId);
         }}
         style={{ cursor: "pointer" }}
         className={open ? styles.fakeHeadingActive : styles.fakeHeading}

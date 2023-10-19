@@ -1,14 +1,13 @@
 // @ts-nocheck
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "@/styles/Home.module.css";
 import CountryList from "@/components/CountryList/CountryList";
 import MediaList from "@/components/MediaList/MediaList";
 import SubNarrativeList from "@/components/SubNarratives/SubNarrativeList";
 
-import getNarrativeData from "../../lib/getNarrativeData";
-import getSubNarrativeData from "../../lib/getSubNarrativeData";
-import getMediaDataByCountry from "../../lib/getMediaDataByCountry";
+import useSWR, { preload } from "swr";
+import { fetcher } from "../../lib/fetcher";
 
 import { useRouter } from "next/router";
 
@@ -16,87 +15,30 @@ function Media() {
   const router = useRouter();
   const { locale } = router;
   const [country, setCountry] = useState("Польща");
-  const [narrativeData, setNarrativeData] = useState(null);
-  const [subNarrativeData, setSubNarrativeData] = useState(null);
-  const [mediaData, setMediaData] = useState(null);
+
   const [media, setMedia] = useState("all");
 
-  useEffect(() => {
-    // if (locale === "it") {
-    //   setCountry("Italia");
-    // } else if (locale === "de") {
-    //   setCountry("Deutschland");
-    // } else if (locale === "ua") {
-    //   setCountry("Польща");
-    // } else if (locale === "en") {
-    //   setCountry("Poland");
-    // } else if (locale === "ru") {
-    //   setCountry("Польша");
-    // } else if (locale === "pl") {
-    //   setCountry("Polska");
-    // } else if (locale === "cs") {
-    //   setCountry("Česká republika");
-    // } else if (locale === "sk") {
-    //   setCountry("Slovensko");
-    // } else if (locale === "hu") {
-    //   setCountry("Magyarország");
-    // }
+  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?media=${media}&lang=${locale}`;
 
-    let isMounted = true;
+  preload(FAKES_BY_MEDIA_URL, fetcher);
 
-    async function getNarrative() {
-      const dataFetched = await getNarrativeData(locale);
-      if (isMounted) {
-        setNarrativeData(dataFetched);
-      }
-    }
-    getNarrative();
+  const { data: fakesByMediaData } = useSWR(FAKES_BY_MEDIA_URL, fetcher);
 
-    async function getSubNarrative() {
-      const dataFetched = await getSubNarrativeData(locale);
-      if (isMounted) {
-        setSubNarrativeData(dataFetched);
-      }
-    }
-    getSubNarrative();
-
-    async function getMedia() {
-      const dataFetched = await getMediaDataByCountry(locale, country, media);
-      if (isMounted) {
-        setMediaData(dataFetched);
-      }
-    }
-    getMedia();
-    return () => {
-      isMounted = false;
-    };
-  }, [locale, country, media]);
-
-  const mediaByMonth = [];
-  const subNarrativId = [];
-
-  mediaData &&
-    mediaData.data.map((item) => {
-      if (!subNarrativId.includes(item.sub_narrative_id)) {
-        subNarrativId.push(item.sub_narrative_id);
-      }
-      mediaByMonth.push(item);
-    });
+  // console.log(Object.keys(fakesByMediaData));
 
   const subNarrativesRender =
-    subNarrativeData &&
-    subNarrativeData.data.map((item) => {
-      if (subNarrativId.includes(item.id)) {
-        return (
-          <SubNarrativeList
-            key={item.id}
-            subNarrativeTitle={item.title}
-            subNarrativeId={item.id}
-            media={mediaByMonth}
-          />
-        );
-      }
+    fakesByMediaData &&
+    Object.keys(fakesByMediaData).map((item) => {
+      return (
+        <SubNarrativeList
+          key={item.id}
+          subNarrativeTitle={item}
+          subNarrativeId={item.id}
+          media={media}
+        />
+      );
     });
+
   return (
     <>
       <Head>

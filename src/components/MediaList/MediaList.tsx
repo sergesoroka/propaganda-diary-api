@@ -1,6 +1,8 @@
 // @ts-nocheck
 import styles from "./MediaList.module.css";
-import data from "../../../data/mediaLists.json";
+
+import useSWR, { preload } from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
 function MediaList({
   country,
@@ -11,8 +13,15 @@ function MediaList({
   media?: string;
   setMedia?: (media: string) => {};
 }) {
-  const mediaList = data.map((item, i) => {
-    if (item.country === country) {
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}`;
+
+  preload(MEDIA_URL, fetcher);
+
+  const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
+
+  const mediaList =
+    mediaData &&
+    mediaData.data.map((item, i) => {
       let mediaName = item.name;
       return (
         <div key={i} onClick={() => setMedia(mediaName)}>
@@ -25,8 +34,7 @@ function MediaList({
           </p>
         </div>
       );
-    }
-  });
+    });
   return (
     <div>
       <hr

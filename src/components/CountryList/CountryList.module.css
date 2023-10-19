@@ -17,7 +17,8 @@
   font-weight: 600 !important;
   letter-spacing: 0.03rem;
   cursor: pointer;
+  user-select: none;
 }
 .activeCountry {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }

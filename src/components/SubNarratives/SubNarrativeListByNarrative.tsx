@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 
@@ -67,7 +68,9 @@ export default function SubNarrativeList({
     mediaData.data.map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <p className={styles.mediaName}>{item.media_name}</p>
+          <Link href={item.link}>
+            <p className={styles.mediaName}>{item.media_name}</p>
+          </Link>
           <p className={styles.mediaCountry}>{item.country}</p>
           <p className={styles.mediaDate}>
             {format(new Date(item.date), "d MMMM yyyy", {

@@ -17,14 +17,15 @@ function Media() {
   const [country, setCountry] = useState("Польща");
 
   const [media, setMedia] = useState("all");
+  const mediaName = media == "all" ? null : `media=${media}`;
 
-  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?media=${media}&lang=${locale}`;
+  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
 
   preload(FAKES_BY_MEDIA_URL, fetcher);
 
   const { data: fakesByMediaData } = useSWR(FAKES_BY_MEDIA_URL, fetcher);
 
-  // console.log(Object.keys(fakesByMediaData));
+  console.log("media page", media);
 
   const subNarrativesRender =
     fakesByMediaData &&

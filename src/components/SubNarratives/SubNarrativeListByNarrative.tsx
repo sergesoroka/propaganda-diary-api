@@ -4,35 +4,42 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 
-import useSWR, { preload } from "swr";
+import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 import styles from "../../components/Fake/Fake.module.css";
-import Link from "next/link";
 
 export default function SubNarrativeList({
   subNarrativeTitle,
+  subNarrId,
   narrativeId,
+  month,
   media,
+  country,
+  year,
+  tag,
 }) {
   const router = useRouter();
   const { locale } = router;
 
   const [open, setOpen] = useState(false);
+  const [subNarrativeId, setSubNarrativeId] = useState(null);
 
-  console.log("SubNarrPage", media);
-  const mediaName = media == "all" ? null : `media=${media}`;
+  const issubNarrativeId = subNarrativeId
+    ? "&sub_narrative_id=" + `${subNarrativeId}`
+    : "";
 
-  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
+  const isCountry =
+    country && country != "all" ? "&country=" + `${country}` : "";
 
-  // const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?media=${media}&lang=${locale}`;
+  const isYear = year ? "&year=" + `${year}` : "";
 
-  preload(FAKES_BY_MEDIA_URL, fetcher);
+  const isMonth = month ? "&month=" + `${month}` : "";
 
-  const { data: fakesByMediaData, isLoading } = useSWR(
-    FAKES_BY_MEDIA_URL,
-    fetcher
-  );
+  const isNarrativeId = narrativeId ? "&narrative_id=" + `${narrativeId}` : "";
+
+  const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isNarrativeId}${issubNarrativeId}${isCountry}${isYear}${isMonth}`;
+  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
 
   const dataLocale =
     locale == "ua"
@@ -56,14 +63,11 @@ export default function SubNarrativeList({
       : uk;
 
   const mediaList =
-    subNarrativeTitle &&
-    fakesByMediaData[subNarrativeTitle] &&
-    fakesByMediaData[subNarrativeTitle].map((item, i) => {
+    mediaData &&
+    mediaData.data.map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <Link href={item.link}>
-            <p className={styles.mediaName}>{item.media_name}</p>
-          </Link>
+          <p className={styles.mediaName}>{item.media_name}</p>
           <p className={styles.mediaCountry}>{item.country}</p>
           <p className={styles.mediaDate}>
             {format(new Date(item.date), "d MMMM yyyy", {
@@ -79,6 +83,7 @@ export default function SubNarrativeList({
       <div
         onClick={() => {
           setOpen(!open);
+          setSubNarrativeId(subNarrId);
         }}
         style={{ cursor: "pointer" }}
         className={open ? styles.fakeHeadingActive : styles.fakeHeading}

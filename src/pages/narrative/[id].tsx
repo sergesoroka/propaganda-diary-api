@@ -13,8 +13,8 @@ import dynamic from "next/dynamic";
 import useSWR, { preload } from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
-const SubNarrativeList = dynamic(
-  () => import("@/components/SubNarratives/SubNarrativeList"),
+const SubNarrativeListByNarrative = dynamic(
+  () => import("@/components/SubNarratives/SubNarrativeListByNarrative"),
   {
     loading: () => <p style={{ margin: "0 auto" }}>Loading...</p>,
   }
@@ -73,7 +73,7 @@ const NarrativePage = () => {
         count++;
         return (
           <div key={sub.id}>
-            <SubNarrativeList
+            <SubNarrativeListByNarrative
               narrativeId={id}
               subNarrativeTitle={sub.title}
               subNarrId={sub.id}

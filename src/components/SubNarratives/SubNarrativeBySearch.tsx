@@ -15,6 +15,8 @@ export default function SubNarrativeBySearch({ title }) {
   const [searchResult, setSearchResult] = useState([]);
 
   const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?search=${searchResult}&lang=${locale}`;
+
+  preload(SEARCH_URL, fetcher);
   const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
 
   const dataMedia = searchData && searchData.data[searchResult];

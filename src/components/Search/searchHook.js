@@ -21,13 +21,13 @@ const useSearchAutoComplete = () => {
     const query = e.target.value.toLowerCase();
     setValue(query);
     if (query.length > 1 && searchData) {
-      const arrayFromObjectData = Object.keys(searchData.data);
+      const arrayFromObjectData = Object.keys(searchData);
 
       const filterSuggestions =
         arrayFromObjectData &&
         arrayFromObjectData.map((item) => {
-          // setSearchResult((prev) => [...prev, searchData.data[item]]);
-          searchResult.push(searchData.data[item]);
+          setSearchResult((prev) => [...prev, searchData[item]]);
+          // searchResult.push(searchData.data[item]);
           return item;
         });
       // .filter((suggestion) => suggestion.toLowerCase().indexOf(query) > -1);

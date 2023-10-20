@@ -19,7 +19,7 @@ export default function SubNarrativeBySearch({ title }) {
   preload(SEARCH_URL, fetcher);
   const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
 
-  const dataMedia = searchData && searchData.data[searchResult];
+ 
 
   const dataLocale =
     locale == "ua"
@@ -43,21 +43,20 @@ export default function SubNarrativeBySearch({ title }) {
       : uk;
 
   const renderMedia =
-    dataMedia &&
-    dataMedia.map((item, i) => {
-      if (item.sub_narrative == title) {
-        return (
-          <div key={i} className={styles.mediaList}>
-            <p className={styles.mediaName}>{item.media_name}</p>
-            <p className={styles.mediaCountry}>{item.country}</p>
-            <p className={styles.mediaDate}>
-              {format(new Date(item.date), "d MMMM yyyy", {
-                locale: dataLocale,
-              })}
-            </p>
-          </div>
-        );
-      }
+    searchData &&
+    title &&
+    searchData[title].map((item, i) => {
+      return (
+        <div key={i} className={styles.mediaList}>
+          <p className={styles.mediaName}>{item.media_name}</p>
+          <p className={styles.mediaCountry}>{item.country}</p>
+          <p className={styles.mediaDate}>
+            {format(new Date(item.date), "d MMMM yyyy", {
+              locale: dataLocale,
+            })}
+          </p>
+        </div>
+      );
     });
 
   return (

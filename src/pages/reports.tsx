@@ -83,45 +83,47 @@ export default function MethodEn() {
         <meta name="description" content="Monthy Reports" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, type: "tween" }}
-        className={styles.main}
-        // style={{ width: "100%", margin: "0 auto" }}
-      >
-        <h1
-          style={{
-            textAlign: "center",
-            textTransform: "uppercase",
-            margin: "4rem 0",
-          }}
+      <div className={styles.main}>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, type: "tween" }}
+
+          // style={{ width: "100%", margin: "0 auto" }}
         >
-          Monthy Reports
-        </h1>
-        <YearsList current={current} setCurrent={setCurrent} />
-        {/* <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
+          <h1
+            style={{
+              textAlign: "center",
+              textTransform: "uppercase",
+              margin: "4rem 0",
+            }}
+          >
+            Monthy Reports
+          </h1>
+          <YearsList current={current} setCurrent={setCurrent} />
+          {/* <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
 
-        <hr
-          style={{
-            height: "2px",
-            background: "#FF2618",
-            border: "none",
-            width: "100%",
-            margin: "2rem 0",
-          }}
-        />
-      </motion.div>
+          <hr
+            style={{
+              height: "2px",
+              background: "#FF2618",
+              border: "none",
+              width: "100%",
+              margin: "2rem 0",
+            }}
+          />
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, type: "tween" }}
-        className=""
-        style={{ width: "70%", margin: "0 auto", minHeight: "100vh" }}
-      >
-        <div className={styles.reportsLayout}>{reportDataRender}</div>
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, type: "tween" }}
+          className=""
+          style={{ width: "70%", margin: "0 auto", minHeight: "100vh" }}
+        >
+          <div className={styles.reportsLayout}>{reportDataRender}</div>
+        </motion.div>
+      </div>
     </div>
   );
 }

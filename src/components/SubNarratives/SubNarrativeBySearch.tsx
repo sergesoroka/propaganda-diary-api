@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 import useSWR, { preload } from "swr";
@@ -18,8 +19,6 @@ export default function SubNarrativeBySearch({ title }) {
 
   preload(SEARCH_URL, fetcher);
   const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
-
- 
 
   const dataLocale =
     locale == "ua"
@@ -48,7 +47,9 @@ export default function SubNarrativeBySearch({ title }) {
     searchData[title].map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <p className={styles.mediaName}>{item.media_name}</p>
+          <Link href={item.link}>
+            <p className={styles.mediaName}>{item.media_name}</p>
+          </Link>
           <p className={styles.mediaCountry}>{item.country}</p>
           <p className={styles.mediaDate}>
             {format(new Date(item.date), "d MMMM yyyy", {

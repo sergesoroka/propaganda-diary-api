@@ -17,7 +17,7 @@ function Media() {
   const [country, setCountry] = useState("Польща");
 
   const [media, setMedia] = useState("all");
-  const mediaName = media == "all" ? null : `media=${media}`;
+  const mediaName = media && `media=${media}`;
 
   const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
 
@@ -25,14 +25,12 @@ function Media() {
 
   const { data: fakesByMediaData } = useSWR(FAKES_BY_MEDIA_URL, fetcher);
 
-  console.log("media page", media);
-
   const subNarrativesRender =
     fakesByMediaData &&
-    Object.keys(fakesByMediaData).map((item) => {
+    Object.keys(fakesByMediaData).map((item, i) => {
       return (
         <SubNarrativeList
-          key={item.id}
+          key={i}
           subNarrativeTitle={item}
           subNarrativeId={item.id}
           media={media}

@@ -42,6 +42,9 @@ export default function SubNarrativeList({
   const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isNarrativeId}${issubNarrativeId}${isCountry}${isYear}${isMonth}`;
   const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
 
+  // const MEDIA_BY_NARRATIVE = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${narrativeId}&lang=${locale}`;
+  // const { data: mediaDataFromNarrative } = useSWR(MEDIA_BY_NARRATIVE, fetcher);
+
   const dataLocale =
     locale == "ua"
       ? uk

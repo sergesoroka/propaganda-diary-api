@@ -13,7 +13,7 @@ function MediaList({
   media?: string;
   setMedia?: (media: string) => {};
 }) {
-  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}`;
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
 
   preload(MEDIA_URL, fetcher);
 
@@ -46,15 +46,7 @@ function MediaList({
           margin: "2rem 0",
         }}
       />
-      <div className={styles.MediaList}>
-        <p
-          className={media === "all" ? styles.listItemActive : styles.listItem}
-          onClick={() => setMedia("all")}
-        >
-          ALL MEDIA
-        </p>
-        {mediaList}
-      </div>
+      <div className={styles.MediaList}>{mediaList}</div>
     </div>
   );
 }

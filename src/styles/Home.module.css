@@ -6,6 +6,7 @@
   padding: 2rem 6rem;
   /* min-height: 100vh; */
   background-color: #fff;
+  min-height: 100vh;
 }
 .archivePage {
   display: grid;

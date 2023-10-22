@@ -45,6 +45,8 @@ export const MonthFakes = () => {
 
   const isMonth = month ? "&month=" + `${month}` : "";
 
+  // https://vox-dashboard.ra-devs.tech/api/dashboards?lang=ua&year=2022&month=05
+
   const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isCountry}${isYear}${isMonth}`;
   const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
 

@@ -10,6 +10,7 @@ import useSWR, { preload } from "swr";
 import { fetcher } from "../../lib/fetcher";
 
 import { useRouter } from "next/router";
+import Loader from "@/components/Icons/Loader";
 
 function Media() {
   const router = useRouter();
@@ -23,7 +24,10 @@ function Media() {
 
   preload(FAKES_BY_MEDIA_URL, fetcher);
 
-  const { data: fakesByMediaData } = useSWR(FAKES_BY_MEDIA_URL, fetcher);
+  const { data: fakesByMediaData, isLoading } = useSWR(
+    FAKES_BY_MEDIA_URL,
+    fetcher
+  );
 
   const subNarrativesRender =
     fakesByMediaData &&
@@ -53,6 +57,7 @@ function Media() {
           setMedia={setMedia}
         />
         <MediaList country={country} setMedia={setMedia} media={media} />
+        {isLoading && <Loader />}
         <div>{subNarrativesRender}</div>
       </main>
     </>

@@ -21,19 +21,25 @@ const SubNarrativeListByNarrative = dynamic(
 );
 
 const NarrativePage = () => {
-  const [tagName, setTagName] = useState("");
+  // const [tagName, setTagName] = useState("");
   const router = useRouter();
   const { locale } = router;
   const { id } = router.query;
 
   const NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`;
-  const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`;
+
+  const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${id}&lang=${locale}&per_page=300`;
 
   preload(NARRATIVES_URL, fetcher);
   preload(SUB_NARRATIVES_URL, fetcher);
 
   const { data: narrativeData, error } = useSWR(NARRATIVES_URL, fetcher);
-  const { data: subNarrativeData } = useSWR(SUB_NARRATIVES_URL, fetcher);
+  const { data: subNarrativeData, isLoading } = useSWR(
+    SUB_NARRATIVES_URL,
+    fetcher
+  );
+
+  console.log(subNarrativeData);
 
   const narrativeDescription =
     narrativeData &&
@@ -68,20 +74,15 @@ const NarrativePage = () => {
 
   const subNarrativesRender =
     subNarrativeData &&
-    subNarrativeData.data.map((sub) => {
-      if (sub.narrative_id == id) {
-        count++;
-        return (
-          <div key={sub.id}>
-            <SubNarrativeListByNarrative
-              narrativeId={id}
-              subNarrativeTitle={sub.title}
-              subNarrId={sub.id}
-              tag={tagName}
-            />
-          </div>
-        );
-      }
+    Object.keys(subNarrativeData).map((item, i) => {
+      count++;
+      return (
+        <SubNarrativeListByNarrative
+          key={i}
+          subNarrativeTitle={item}
+          subNarrativeId={item.id}
+        />
+      );
     });
 
   return (
@@ -93,7 +94,7 @@ const NarrativePage = () => {
       </Head>
       <div className={styles.barChartWrap}>
         <p className={styles.fakesNumber}>
-          <SpetialText name={"Fakes"} />: {count}
+          <SpetialText name={"Fakes"} />: {count > 0 && count}
         </p>
         <FakesBarChart />
       </div>

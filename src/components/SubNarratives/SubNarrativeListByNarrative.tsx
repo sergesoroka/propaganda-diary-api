@@ -9,6 +9,7 @@ import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 import styles from "../../components/Fake/Fake.module.css";
+import Loader from "../Icons/Loader";
 
 export default function SubNarrativeList({
   subNarrativeTitle,
@@ -96,7 +97,7 @@ export default function SubNarrativeList({
       >
         {subNarrativeTitle}
       </div>
-      {isLoading && <p style={{ textAlign: "center" }}>Loading...</p>}
+      {isLoading && <Loader />}
       {open && <div>{mediaList}</div>}
     </div>
   );

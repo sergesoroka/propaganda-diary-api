@@ -58,12 +58,12 @@ function ReportPage() {
             </h1>{" "}
             <p className={styles.reportsAuthor}>{item.author}</p>
             <p className={styles.reportsLead}>{item.lead}</p>
-            <Image
+            {/* <Image
               src="https://voxukraine.org/wp-content/uploads/2023/08/Propaganda-diary.png"
               width={922}
               height={518}
               alt="Picture of the author"
-            />
+            /> */}
             <p className={styles.reportsDisclaimer}>{item.disclaimer}</p>
             <CountryList
               country={country}
@@ -86,7 +86,7 @@ function ReportPage() {
     });
 
   return (
-    <div className={styles.mainLeft}>
+    <div className={styles.mainReports}>
       <Head>
         <title>Propaganda Diary | Report </title>
         <meta name="description" content="Monthy Report" />

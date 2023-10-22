@@ -559,6 +559,11 @@
   }
 }
 
+.mainReports {
+  width: 85%;
+  margin: 0 auto;
+  padding: 3rem 0 0 1rem;
+}
 .reportsLayout {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -572,6 +577,7 @@
 }
 .reportsLead {
   font-weight: 900 !important;
+  margin-bottom: 2rem;
 }
 .reportsDisclaimer {
   color: #727272;

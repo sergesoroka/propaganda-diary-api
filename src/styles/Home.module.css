@@ -384,10 +384,12 @@
 .aboutParag p {
   margin: 1rem 0 !important;
   font-size: 1rem !important;
+  font-weight: 400 !important;
   line-height: 1.8rem !important;
 }
 .aboutParag ul li {
   font-size: 0.9rem !important;
+  font-weight: 400 !important;
   margin: 0.6rem 1rem !important;
 }
 
@@ -559,7 +561,8 @@
   }
 }
 
-.mainReports {
+.mainReports,
+.mainAbout {
   width: 85%;
   margin: 0 auto;
   padding: 3rem 0 0 1rem;

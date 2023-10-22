@@ -43,7 +43,7 @@ export default function About() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, type: "tween" }}
-        className={styles.mainLeft}
+        className={styles.mainAbout}
       >
         {aboutRender}
       </motion.div>

@@ -21,14 +21,14 @@ export default function About() {
     data &&
     data.data.map((item, i) => {
       return (
-        <>
-          <h1 key={i}>{item.title}</h1>
+        <div key={i}>
+          <h1>{item.title}</h1>
           <p
             className={styles.aboutParag}
             style={{ lineHeight: "1.6rem", marginBottom: "1rem" }}
             dangerouslySetInnerHTML={{ __html: item.content }}
           />
-        </>
+        </div>
       );
     });
 

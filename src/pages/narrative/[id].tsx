@@ -39,8 +39,6 @@ const NarrativePage = () => {
     fetcher
   );
 
-  console.log(subNarrativeData);
-
   const narrativeDescription =
     narrativeData &&
     // @ts-ignore

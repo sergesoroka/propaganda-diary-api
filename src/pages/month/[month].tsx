@@ -87,10 +87,10 @@ export const MonthFakes = () => {
 
   const subNarrativRender =
     subNarrativeData &&
-    subNarrativeData.data.map((sub) => {
+    subNarrativeData.data.map((sub, i) => {
       if (subNarrativId.includes(sub.id)) {
         return (
-          <div key={sub.id}>
+          <div key={i}>
             <h2
               onClick={() => setOpen(!open)}
               className={
@@ -99,9 +99,9 @@ export const MonthFakes = () => {
             >
               {sub.title}
             </h2>
-            {mediaByMonth.map((media) => {
+            {mediaByMonth.map((media, a) => {
               if (media.sub_narrative_id == sub.id) {
-                return <SubNarrativeListByMonth key={media.id} item={media} />;
+                return <SubNarrativeListByMonth key={a} item={media} />;
               }
             })}
           </div>
@@ -123,13 +123,13 @@ export const MonthFakes = () => {
           <Timeline current={current} setMedia={setMedia} />
           <div className={styles.yearsWrap}>
             <p
-              className={current === "2022" ? styles.yearActive : styles.year}
+              className={current == "2022" ? styles.yearActive : styles.year}
               onClick={() => setCurrent("2022")}
             >
               2022
             </p>
             <p
-              className={current === "2023" ? styles.yearActive : styles.year}
+              className={current == "2023" ? styles.yearActive : styles.year}
               onClick={() => setCurrent("2023")}
             >
               2023

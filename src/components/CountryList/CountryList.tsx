@@ -29,7 +29,7 @@ function CountryList({
       return (
         <li
           key={i}
-          className={country === item.name && styles.activeCountry}
+          className={country == item.name ? styles.activeCountry : ""}
           onClick={() => {
             setCountry(item.name);
             setMedia("all");

@@ -1,29 +1,23 @@
+// @ts-nocheck
 import styles from "./BarChart.module.css";
 import { motion } from "framer-motion";
+
+import useSWR from "swr";
+import { fetcher } from "../../../lib/fetcher";
 
 // import { commonStatistic } from "../../../utils/statisticCalculate";
 import Link from "next/link";
 import SpetialText from "../../../data/SpetialText";
 import { useRouter } from "next/router";
 
-const dataPlaceholder = [
-  { name: "01", score: 10 },
-  { name: "02", score: 360 },
-  { name: "03", score: 690 },
-  { name: "04", score: 900 },
-  { name: "05", score: 870 },
-  { name: "06", score: 1030 },
-  { name: "07", score: 880 },
-  { name: "08", score: 700 },
-  { name: "09", score: 750 },
-  { name: "10", score: 960 },
-  { name: "11", score: 1400 },
-  { name: "12", score: 1430 },
-];
-
 const BarChart = () => {
   const router = useRouter();
   const { month } = router.query;
+
+  const { data: statisticData } = useSWR(
+    `https://vox-dashboard.ra-devs.tech/api/dashboards-statistic`,
+    fetcher
+  );
   // const data = [
   //   {
   //     name: "01",
@@ -79,24 +73,28 @@ const BarChart = () => {
     <div>
       <div className={styles.BarChart}>
         <svg className={styles.barChart} style={{ transform: "scaleY(-1)" }}>
-          {dataPlaceholder.map((item, i) => {
-            let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
-            return (
-              <Link key={item.name} href={`/month/${item.name}`}>
-                <rect
-                  // @ts-ignore
-
-                  className={
-                    month === item.name ? styles.barActive : styles.bar
-                  }
-                  width="60"
-                  height={item.score / 10}
-                  style={{ fill: color }}
-                  x={i * 70}
-                />
-              </Link>
-            );
-          })}
+          {statisticData &&
+            statisticData.data.map((item, i) => {
+              if (i<1>) {
+                <rect style={{ width: "16px" }} />;
+              }
+              if (item.year == 2022) {
+                let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
+                return (
+                  <Link key={i} href={`/month/${item.month}`}>
+                    <rect
+                      className={
+                        month == item.month ? styles.barActive : styles.bar
+                      }
+                      width="60"
+                      height={item.sub_narrative}
+                      style={{ fill: color }}
+                      x={i * 70}
+                    />
+                  </Link>
+                );
+              }
+            })}
         </svg>
 
         <div
@@ -112,18 +110,12 @@ const BarChart = () => {
             transition={{ duration: 0.8 }}
             className={styles.barNumbers}
           >
-            <p>01</p>
-            <p>02</p>
-            <p>03</p>
-            <p>04</p>
-            <p>05</p>
-            <p>06</p>
-            <p>07</p>
-            <p>08</p>
-            <p>09</p>
-            <p>10</p>
-            <p>11</p>
-            <p>12</p>
+            {statisticData &&
+              statisticData.data.map((item, i) => {
+                if (item.year == 2022) {
+                  return <p key={i}>{item.month}</p>;
+                }
+              })}
           </motion.div>
         </div>
 
@@ -134,22 +126,24 @@ const BarChart = () => {
 
       <div className={styles.BarChartMob}>
         <svg className={styles.barChartMob} style={{ transform: "scaleY(-1)" }}>
-          {dataPlaceholder.map((item, i) => {
-            let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
-            return (
-              <Link key={item.name} href={`/month/${item.name}`}>
-                <rect
-                  className={
-                    month === item.name ? styles.barActiveMob : styles.barMob
-                  }
-                  width="17"
-                  height={item.score / 10}
-                  style={{ fill: color }}
-                  x={i * 26}
-                />
-              </Link>
-            );
-          })}
+          {statisticData &&
+            statisticData.data.map((item, i) => {
+              let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
+
+              return (
+                <Link key={i} href={`/month/${item.month}`}>
+                  <rect
+                    className={
+                      month == item.month ? styles.barActiveMob : styles.barMob
+                    }
+                    width="17"
+                    height={item.sub_narrative}
+                    style={{ fill: color }}
+                    x={i * 26}
+                  />
+                </Link>
+              );
+            })}
         </svg>
 
         <div
@@ -164,7 +158,6 @@ const BarChart = () => {
             transition={{ duration: 0.8 }}
             className={styles.barNumbersMob}
           >
-            <p>01</p>
             <p>02</p>
             <p>03</p>
             <p>04</p>

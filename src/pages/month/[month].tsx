@@ -51,23 +51,23 @@ export const MonthFakes = () => {
   const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
 
   const monthName =
-    month === "01"
+    month === "1"
       ? 1
-      : month === "02"
+      : month === "2"
       ? 2
-      : month === "03"
+      : month === "3"
       ? 3
-      : month === "04"
+      : month === "4"
       ? 4
-      : month === "05"
+      : month === "5"
       ? 5
-      : month === "06"
+      : month === "6"
       ? 6
-      : month === "07"
+      : month === "7"
       ? 7
-      : month === "08"
+      : month === "8"
       ? 8
-      : month === "09"
+      : month === "9"
       ? 9
       : month === "10"
       ? 10

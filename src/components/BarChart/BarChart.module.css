@@ -7,8 +7,6 @@
   text-align: center;
 }
 
-
-
 .barChart {
   width: 830px;
   height: 200px;
@@ -32,15 +30,15 @@
   color: #a4a4a4;
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 87%;
   margin: 0 20px;
 }
 .barNumbersCurrent {
   color: #a4a4a4;
   display: flex;
   justify-content: space-between;
-  width: 90px;
-  margin: 0 20px;
+  width: 87%;
+  margin: 0 96px;
 }
 .barNumbersMob {
   color: #a4a4a4;
@@ -57,7 +55,7 @@
   font-size: 0.84rem;
 }
 
-.barNumbers > p { 
+.barNumbers > p {
   width: 20px;
 }
 

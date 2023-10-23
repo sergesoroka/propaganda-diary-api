@@ -1,5 +1,7 @@
 import dataEn from "../data/dataEn.json";
 
+// https://vox-dashboard.ra-devs.tech/api/dashboards-statistic
+
 export const uniqueNarratives = [];
 dataEn.map((c) => {
   if (!uniqueNarratives.includes(c.Narrative)) {
@@ -34,8 +36,6 @@ export const commonStatistic = (start, finish, type) => {
   return arr;
 };
 
-
-
 export const tagsOfNarrative = (narrative) => {
   const uniqueTags = [];
   dataEn.map((item) => {
@@ -45,6 +45,3 @@ export const tagsOfNarrative = (narrative) => {
   });
   return uniqueTags;
 };
-
-
-

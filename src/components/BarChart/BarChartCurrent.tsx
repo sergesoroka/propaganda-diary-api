@@ -17,7 +17,6 @@ const BarChartCurrent = () => {
     `https://vox-dashboard.ra-devs.tech/api/dashboards-statistic`,
     fetcher
   );
-  console.log(month);
 
   let count = 0;
 

@@ -43,8 +43,6 @@ function ReportPage() {
     fetcher
   );
 
-  console.log("reports", data);
-
   const reportDataRender =
     data &&
     data.data.map((item, i) => {

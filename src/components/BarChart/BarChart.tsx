@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
-// import { commonStatistic } from "../../../utils/statisticCalculate";
 import Link from "next/link";
 import SpetialText from "../../../data/SpetialText";
 import { useRouter } from "next/router";
@@ -18,56 +17,6 @@ const BarChart = () => {
     `https://vox-dashboard.ra-devs.tech/api/dashboards-statistic`,
     fetcher
   );
-  // const data = [
-  //   {
-  //     name: "01",
-  //     score: commonStatistic("2022-01-01", "2022-01-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "02",
-  //     score: commonStatistic("2022-02-01", "2022-02-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "03",
-  //     score: commonStatistic("2022-03-01", "2022-03-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "04",
-  //     score: commonStatistic("2022-04-01", "2022-04-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "05",
-  //     score: commonStatistic("2022-05-01", "2022-05-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "06",
-  //     score: commonStatistic("2022-06-01", "2022-06-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "07",
-  //     score: commonStatistic("2022-07-01", "2022-07-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "08",
-  //     score: commonStatistic("2022-08-01", "2022-08-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "09",
-  //     score: commonStatistic("2022-09-01", "2022-09-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "10",
-  //     score: commonStatistic("2022-10-01", "2022-10-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "11",
-  //     score: commonStatistic("2022-11-01", "2022-11-31", "Fake").length * 10,
-  //   },
-  //   {
-  //     name: "12",
-  //     score: commonStatistic("2022-12-01", "2022-12-31", "Fake").length * 10,
-  //   },
-  // ];
 
   return (
     <div>
@@ -124,7 +73,7 @@ const BarChart = () => {
         </p>
       </div>
 
-      <div className={styles.BarChartMob}>
+      {/* <div className={styles.BarChartMob}>
         <svg className={styles.barChartMob} style={{ transform: "scaleY(-1)" }}>
           {statisticData &&
             statisticData.data.map((item, i) => {
@@ -175,7 +124,7 @@ const BarChart = () => {
         <p className={styles.subtitle}>
           <SpetialText name={"Fakes_dynamics"} />, 2022
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -3,21 +3,23 @@ import styles from "./MediaList.module.css";
 
 import useSWR, { preload } from "swr";
 import { fetcher } from "../../../lib/fetcher";
+import { useEffect } from "react";
 
 function MediaList({
   country,
   media,
   setMedia,
+  mediaData,
 }: {
   country?: string;
   media?: string;
   setMedia?: (media: string) => {};
 }) {
-  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
+  // const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
 
-  preload(MEDIA_URL, fetcher);
+  // preload(MEDIA_URL, fetcher);
 
-  const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
+  // const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
 
   const mediaList =
     mediaData &&
@@ -27,7 +29,9 @@ function MediaList({
         <div key={i} onClick={() => setMedia(mediaName)}>
           <p
             className={
-              media === item.name ? styles.listItemActive : styles.listItem
+              country && media && media == item.name
+                ? styles.listItemActive
+                : styles.listItem
             }
           >
             {item.name}

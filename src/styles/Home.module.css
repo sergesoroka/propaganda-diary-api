@@ -59,11 +59,12 @@
   min-height: 100vh;
 }
 .listCountryWrap {
-  padding: 2rem 18rem;
+  width: 65%;
+  margin: 0 auto;
 }
 .listCountry {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .listCountry li {
   margin-right: 2rem;

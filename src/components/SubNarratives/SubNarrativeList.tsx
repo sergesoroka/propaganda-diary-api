@@ -54,6 +54,7 @@ export default function SubNarrativeList({
 
   const mediaList =
     subNarrativeTitle &&
+    media &&
     fakesByMediaData[subNarrativeTitle] &&
     fakesByMediaData[subNarrativeTitle].map((item, i) => {
       return (

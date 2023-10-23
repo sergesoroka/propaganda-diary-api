@@ -75,7 +75,7 @@ const BarChartCurrent = () => {
         </p>
       </div>
 
-      {/* <div className={styles.BarChartMob}>
+      <div className={styles.BarChartMob}>
         <svg className={styles.barChartMob} style={{ transform: "scaleY(-1)" }}>
           {statisticData &&
             statisticData.data.map((item, i) => {
@@ -120,7 +120,7 @@ const BarChartCurrent = () => {
         <p className={styles.subtitle}>
           <SpetialText name={"Fakes_dynamics"} />, 2023
         </p>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import CountryList from "@/components/CountryList/CountryList";
 import MediaList from "@/components/MediaList/MediaList";
@@ -17,7 +17,17 @@ function Media() {
   const { locale } = router;
   const [country, setCountry] = useState("Польща");
 
-  const [media, setMedia] = useState("all");
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
+
+  preload(MEDIA_URL, fetcher);
+
+  const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
+  const [media, setMedia] = useState("");
+
+  useEffect(() => {
+    setMedia(mediaData && mediaData.data[0].name);
+  }, [country, mediaData, setMedia]);
+
   const mediaName = media && `media=${media}`;
 
   const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
@@ -30,6 +40,8 @@ function Media() {
   );
 
   const subNarrativesRender =
+    country &&
+    media &&
     fakesByMediaData &&
     Object.keys(fakesByMediaData).map((item, i) => {
       return (
@@ -56,7 +68,12 @@ function Media() {
           setCountry={setCountry}
           setMedia={setMedia}
         />
-        <MediaList country={country} setMedia={setMedia} media={media} />
+        <MediaList
+          country={country}
+          setMedia={setMedia}
+          media={media}
+          mediaData={mediaData}
+        />
         {isLoading && <Loader />}
         <div>{subNarrativesRender}</div>
       </main>

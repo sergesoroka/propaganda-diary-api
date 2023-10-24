@@ -4,13 +4,12 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import stylesLocal from "../../components/SubNarratives/SubNarrative.module.css";
+
 import SpetialText from "../../../data/SpetialText";
 import BackArrow from "@/components/Icons/BackArrow";
 import styles from "../../styles/Home.module.css";
 import Timeline from "@/components/BarChart/Timeline";
 import CountryList from "@/components/CountryList/CountryList";
-import SubNarrativeListByNarrative from "@/components/SubNarratives/SubNarrativeListByNarrative";
 
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
@@ -31,11 +30,6 @@ export const MonthFakes = () => {
   const [current, setCurrent] = useState("2022");
   const [country, setCountry] = useState("all");
   const [media, setMedia] = useState("all");
-
-  const { data: subNarrativeData, error: narrDataError } = useSWR(
-    `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=350`,
-    fetcher
-  );
 
   const isCountry =
     country && country != "all" ? "&country=" + `${country}` : "";
@@ -86,40 +80,6 @@ export const MonthFakes = () => {
       : month === "12"
       ? 12
       : "";
-  const mediaByMonth = [];
-  const subNarrativId = [];
-
-  // mediaData &&
-  //   mediaData.data.map((item) => {
-  //     if (!subNarrativId.includes(item.sub_narrative_id)) {
-  //       subNarrativId.push(item.sub_narrative_id);
-  //     }
-  //     mediaByMonth.push(item);
-  //   });
-
-  // const subNarrativesRender =
-  //   subNarrativeData &&
-  //   subNarrativeData.data.map((sub, i) => {
-  //     if (subNarrativId.includes(sub.id)) {
-  //       return (
-  //         <div key={i}>
-  //           <h2
-  //             onClick={() => setOpen(!open)}
-  //             className={
-  //               open ? stylesLocal.fakeHeadingActive : stylesLocal.fakeHeading
-  //             }
-  //           >
-  //             {sub.title}
-  //           </h2>
-  //           {mediaByMonth.map((media, a) => {
-  //             if (media.sub_narrative_id == sub.id) {
-  //               return <SubNarrativeListByMonth key={a} item={media} />;
-  //             }
-  //           })}
-  //         </div>
-  //       );
-  //     }
-  //   });
 
   return (
     <>
@@ -161,7 +121,7 @@ export const MonthFakes = () => {
                   <BackArrow />
                 </Link>
                 <p className={styles.tagHeading}>
-                  <SpetialText name={monthName} />, {current}
+                  {month && <SpetialText name={monthName} />}, {current}
                 </p>
                 <hr
                   style={{
@@ -174,8 +134,7 @@ export const MonthFakes = () => {
                 />
               </div>
             )}
-            {/* {subNarrativRender} */}
-            {/* {mediaRender} */}
+
             {subNarrativesRender}
           </div>
         </div>

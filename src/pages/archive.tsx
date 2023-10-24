@@ -1,6 +1,6 @@
 import styles from "@/styles/Home.module.css";
 import StatisticDisplay from "@/components/StatisticDisplay/StatisticDisplay";
-import { commonStatistic } from "../../utils/statisticCalculate";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Head from "next/head";
@@ -31,10 +31,7 @@ const Archive = () => {
     statisticData.data.map((item, i) => {
       if (current == item.year) {
         return (
-          <Link
-            key={i}
-            href={"/month/" + (item.month < 10 ? "0" + item.month : item.month)}
-          >
+          <Link key={i} href={"/month/" + item.month}>
             <StatisticDisplay
               mode="disactive"
               month={item.month}

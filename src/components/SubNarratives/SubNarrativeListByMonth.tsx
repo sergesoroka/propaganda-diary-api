@@ -4,14 +4,20 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 
-import useSWR from "swr";
-import { fetcher } from "../../../lib/fetcher";
+import Link from "next/link";
 
 import styles from "./SubNarrative.module.css";
+import Loader from "../Icons/Loader";
 
-export default function SubNarrativeListByMonth({ item }) {
+export default function SubNarrativeListByMonth({
+  mediaData,
+  subNarrativeTitle,
+  isLoading,
+}) {
   const router = useRouter();
   const { locale } = router;
+
+  const [open, setOpen] = useState(false);
 
   const dataLocale =
     locale == "ua"
@@ -34,45 +40,37 @@ export default function SubNarrativeListByMonth({ item }) {
       ? ru
       : uk;
 
-  // const mediaList =
-  //   mediaData &&
-  //   mediaData.data.map((item, i) => {
-  //     return (
-  //       <div key={i} className={styles.mediaList}>
-  //         <p className={styles.mediaName}>{item.media_name}</p>
-  //         <p className={styles.mediaCountry}>{item.country}</p>
-  //         <p className={styles.mediaDate}>
-  //           {format(new Date(item.date), "d MMMM yyyy", {
-  //             locale: dataLocale,
-  //           })}
-  //         </p>
-  //       </div>
-  //     );
-  //   });
-
+  const mediaList =
+    subNarrativeTitle &&
+    mediaData[subNarrativeTitle] &&
+    mediaData[subNarrativeTitle].map((item, i) => {
+      return (
+        <div key={i} className={styles.mediaList}>
+          <Link href={item.link}>
+            <p className={styles.mediaName}>{item.media_name}</p>
+          </Link>
+          <p className={styles.mediaCountry}>{item.country}</p>
+          <p className={styles.mediaDate}>
+            {format(new Date(item.date), "d MMMM yyyy", {
+              locale: dataLocale,
+            })}
+          </p>
+        </div>
+      );
+    });
   return (
     <div style={{ maxWidth: "700px" }}>
-      {/* <div
+      <div
         onClick={() => {
           setOpen(!open);
-          setSubNarrativeId(subNarrId);
         }}
         style={{ cursor: "pointer" }}
         className={open ? styles.fakeHeadingActive : styles.fakeHeading}
       >
-        {/* {subNarrativeTitle} */}
-      {/* </div> */}
-      {/* {isLoading && <p style={{ textAlign: "center" }}>Loading...</p>} */}
-
-      <div className={styles.mediaList}>
-        <p className={styles.mediaName}>{item.media_name}</p>
-        <p className={styles.mediaCountry}>{item.country}</p>
-        <p className={styles.mediaDate}>
-          {format(new Date(item.date), "d MMMM yyyy", {
-            locale: dataLocale,
-          })}
-        </p>
+        {subNarrativeTitle}
       </div>
+      {isLoading && <Loader />}
+      {open && <div>{mediaList}</div>}
     </div>
   );
 }

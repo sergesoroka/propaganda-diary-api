@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import PolandLists from "../components/Lists/PolandLists";
@@ -5,10 +6,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
+import CountryList from "@/components/CountryList/CountryList";
+
 export default function ListsPage() {
   const router = useRouter();
   const { locale } = router;
   const [country, setCountry] = useState("poland");
+  const [media, setMedia] = useState("");
 
   const poland =
     (locale == "ua" && "Польща") ||
@@ -155,7 +159,41 @@ export default function ListsPage() {
             príbehy o Ukrajine.
           </p>
         )}
+
+        {/* <CountryList
+          country={country}
+          setCountry={setCountry}
+          setMedia={setMedia}
+        /> */}
         <ul className={styles.listCountry}>
+          <li
+            className={country === "italy" ? styles.activeCountry : ""}
+            onClick={() => setCountry("italy")}
+          >
+            {locale == "ua" && "Італія"}
+            {locale == "en" && "Italy"}
+            {locale == "it" && "Italia"}
+            {locale == "de" && "Italien"}
+            {locale == "ru" && "Италия"}
+            {locale == "pl" && "Włochy"}
+            {locale == "hu" && "Olaszország"}
+            {locale == "cs" && "Itálie"}
+            {locale == "sk" && "Taliansko"}
+          </li>
+          <li
+            className={country === "germany" ? styles.activeCountry : ""}
+            onClick={() => setCountry("germany")}
+          >
+            {locale == "ua" && "Німеччина"}
+            {locale == "en" && "Germany"}
+            {locale == "it" && "Germania"}
+            {locale == "de" && "Deutschland"}
+            {locale == "ru" && "Германия"}
+            {locale == "pl" && "Niemcy"}
+            {locale == "hu" && "Németország"}
+            {locale == "cs" && "Německo"}
+            {locale == "sk" && "Nemecko"}
+          </li>
           <li
             className={country === "poland" ? styles.activeCountry : ""}
             onClick={() => setCountry("poland")}
@@ -185,20 +223,6 @@ export default function ListsPage() {
             {locale == "sk" && "Slovensko"}
           </li>
           <li
-            className={country === "czech" ? styles.activeCountry : ""}
-            onClick={() => setCountry("czech")}
-          >
-            {locale == "ua" && "Чехія"}
-            {locale == "en" && "The Czech Republic"}
-            {locale == "it" && "Repubblica Ceca"}
-            {locale == "de" && "Die Tschechische Republik"}
-            {locale == "ru" && "Чехия"}
-            {locale == "pl" && "Republika Czeska"}
-            {locale == "hu" && "Cseh Köztársaság"}
-            {locale == "cs" && "Česká republika"}
-            {locale == "sk" && "Česká republika"}
-          </li>
-          <li
             className={country === "hungary" ? styles.activeCountry : ""}
             onClick={() => setCountry("hungary")}
           >
@@ -213,32 +237,18 @@ export default function ListsPage() {
             {locale == "sk" && "Maďarsko"}
           </li>
           <li
-            className={country === "germany" ? styles.activeCountry : ""}
-            onClick={() => setCountry("germany")}
+            className={country === "czech" ? styles.activeCountry : ""}
+            onClick={() => setCountry("czech")}
           >
-            {locale == "ua" && "Німеччина"}
-            {locale == "en" && "Germany"}
-            {locale == "it" && "Germania"}
-            {locale == "de" && "Deutschland"}
-            {locale == "ru" && "Германия"}
-            {locale == "pl" && "Niemcy"}
-            {locale == "hu" && "Németország"}
-            {locale == "cs" && "Německo"}
-            {locale == "sk" && "Nemecko"}
-          </li>
-          <li
-            className={country === "italy" ? styles.activeCountry : ""}
-            onClick={() => setCountry("italy")}
-          >
-            {locale == "ua" && "Італія"}
-            {locale == "en" && "Italy"}
-            {locale == "it" && "Italia"}
-            {locale == "de" && "Italien"}
-            {locale == "ru" && "Италия"}
-            {locale == "pl" && "Włochy"}
-            {locale == "hu" && "Olaszország"}
-            {locale == "cs" && "Itálie"}
-            {locale == "sk" && "Taliansko"}
+            {locale == "ua" && "Чехія"}
+            {locale == "en" && "The Czech Republic"}
+            {locale == "it" && "Repubblica Ceca"}
+            {locale == "de" && "Die Tschechische Republik"}
+            {locale == "ru" && "Чехия"}
+            {locale == "pl" && "Republika Czeska"}
+            {locale == "hu" && "Cseh Köztársaság"}
+            {locale == "cs" && "Česká republika"}
+            {locale == "sk" && "Česká republika"}
           </li>
         </ul>
       </div>

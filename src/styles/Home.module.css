@@ -397,6 +397,10 @@
 .aboutParag h2 {
   margin-top: 3rem !important;
 }
+
+.aboutParag p > a {
+  color: #ff2618 !important;
+}
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

@@ -9,15 +9,17 @@ import Link from "next/link";
 import SpetialText from "../../../data/SpetialText";
 import { useRouter } from "next/router";
 
-const BarChart = () => {
+const BarChart = (current) => {
   const router = useRouter();
   const { month } = router.query;
+
+  const dateFull = router.query;
 
   const { data: statisticData } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/dashboards-statistic`,
     fetcher
   );
-
+  console.log(dateFull.year, dateFull.month);
   return (
     <div>
       <div className={styles.BarChart}>
@@ -30,7 +32,7 @@ const BarChart = () => {
               if (item.year == 2022) {
                 let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
                 return (
-                  <Link key={i} href={`/month/${item.month}`}>
+                  <Link key={i} href={`/${item.year}/${item.month}`}>
                     <rect
                       className={
                         month == item.month ? styles.barActive : styles.bar
@@ -80,7 +82,7 @@ const BarChart = () => {
               let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
 
               return (
-                <Link key={i} href={`/month/${item.month}`}>
+                <Link key={i} href={`/${item.year}/${item.month}`}>
                   <rect
                     className={
                       month == item.month ? styles.barActiveMob : styles.barMob

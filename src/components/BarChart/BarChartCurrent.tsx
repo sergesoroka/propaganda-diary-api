@@ -9,7 +9,7 @@ import Link from "next/link";
 import SpetialText from "../../../data/SpetialText";
 import { useRouter } from "next/router";
 
-const BarChartCurrent = () => {
+const BarChartCurrent = (current) => {
   const router = useRouter();
   const { month } = router.query;
 
@@ -31,7 +31,7 @@ const BarChartCurrent = () => {
 
                 let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
                 return (
-                  <Link key={i} href={`/month/${item.month}`}>
+                  <Link key={i} href={`/${item.year}/${item.month}`}>
                     <rect
                       className={
                         month == item.month ? styles.barActive : styles.bar
@@ -82,7 +82,7 @@ const BarChartCurrent = () => {
               if (item.year == 2023) {
                 let color = i % 2 === 0 ? "#CDCDCD" : "#e4e4e4";
                 return (
-                  <Link key={i} href={`/month/${item.month}`}>
+                  <Link key={i} href={`/${item.year}/${item.month}`}>
                     <rect
                       className={
                         month == item.month

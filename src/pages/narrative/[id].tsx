@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import styles from "../../../src/styles/Home.module.css";
 import BackArrow from "@/components/Icons/BackArrow";
 import SpetialText from "../../../data/SpetialText";
+import Loader from "@/components/Icons/Loader";
 
 import { FakesBarChart } from "@/components/FakesBarChart/FakesBarChart";
-import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 import useSWR, { preload } from "swr";
@@ -16,19 +16,17 @@ import { fetcher } from "../../../lib/fetcher";
 const SubNarrativeListByNarrative = dynamic(
   () => import("@/components/SubNarratives/SubNarrativeListByNarrative"),
   {
-    loading: () => <p style={{ margin: "0 auto" }}>Loading...</p>,
+    loading: () => <Loader />,
   }
 );
 
 const NarrativePage = () => {
-  // const [tagName, setTagName] = useState("");
   const router = useRouter();
   const { locale } = router;
   const { id } = router.query;
 
   const NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`;
-
-  const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${id}&lang=${locale}&per_page=300`;
+  const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${id}&lang=${locale}`;
 
   preload(NARRATIVES_URL, fetcher);
   preload(SUB_NARRATIVES_URL, fetcher);
@@ -79,6 +77,8 @@ const NarrativePage = () => {
           key={i}
           subNarrativeTitle={item}
           subNarrativeId={item.id}
+          mediaData={subNarrativeData}
+          isLoading={isLoading}
         />
       );
     });

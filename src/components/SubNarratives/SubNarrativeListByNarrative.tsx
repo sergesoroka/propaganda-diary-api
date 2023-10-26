@@ -5,9 +5,6 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
 
-import useSWR from "swr";
-import { fetcher } from "../../../lib/fetcher";
-
 import styles from "../../components/Fake/Fake.module.css";
 import Loader from "../Icons/Loader";
 
@@ -15,36 +12,15 @@ export default function SubNarrativeList({
   subNarrativeTitle,
   subNarrId,
   narrativeId,
-  month,
-  media,
-  country,
-  year,
-  tag,
+  mediaData,
+  isLoading,
 }) {
   const router = useRouter();
   const { locale } = router;
+  const { id } = router.query;
 
   const [open, setOpen] = useState(false);
   const [subNarrativeId, setSubNarrativeId] = useState(null);
-
-  const issubNarrativeId = subNarrativeId
-    ? "&sub_narrative_id=" + `${subNarrativeId}`
-    : "";
-
-  const isCountry =
-    country && country != "all" ? "&country=" + `${country}` : "";
-
-  const isYear = year ? "&year=" + `${year}` : "";
-
-  const isMonth = month ? "&month=" + `${month}` : "";
-
-  const isNarrativeId = narrativeId ? "&narrative_id=" + `${narrativeId}` : "";
-
-  const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}${isNarrativeId}${issubNarrativeId}${isCountry}${isYear}${isMonth}`;
-  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
-
-  // const MEDIA_BY_NARRATIVE = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${narrativeId}&lang=${locale}`;
-  // const { data: mediaDataFromNarrative } = useSWR(MEDIA_BY_NARRATIVE, fetcher);
 
   const dataLocale =
     locale == "ua"
@@ -69,7 +45,8 @@ export default function SubNarrativeList({
 
   const mediaList =
     mediaData &&
-    mediaData.data.map((item, i) => {
+    mediaData[subNarrativeTitle] &&
+    mediaData[subNarrativeTitle].map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
           <Link href={item.link}>

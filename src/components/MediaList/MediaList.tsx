@@ -1,10 +1,6 @@
 // @ts-nocheck
 import styles from "./MediaList.module.css";
 
-import useSWR, { preload } from "swr";
-import { fetcher } from "../../../lib/fetcher";
-import { useEffect } from "react";
-
 function MediaList({
   country,
   media,
@@ -15,12 +11,6 @@ function MediaList({
   media?: string;
   setMedia?: (media: string) => {};
 }) {
-  // const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
-
-  // preload(MEDIA_URL, fetcher);
-
-  // const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
-
   const mediaList =
     mediaData &&
     mediaData.data.map((item, i) => {

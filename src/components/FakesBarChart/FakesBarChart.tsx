@@ -1,12 +1,10 @@
 // @ts-nocheck
-import styles from "@/styles/Home.module.css";
-import { useState } from "react";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { useRouter } from "next/router";
 import useLangSwitcher from "../../../utils/i18n/useLangSwitcher";
-// import SpetialText from "../../../data/SpetialText";
 
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
@@ -17,12 +15,10 @@ export const FakesBarChart = () => {
   const { data } = useLangSwitcher();
 
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
-  const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher);
-
-  // const { data: dataSubNarratives } = useSWR(
-  //   `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&per_page=300`,
-  //   fetcher
-  // );
+  const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
 
   const renderNarratives =
     dataNarrative &&

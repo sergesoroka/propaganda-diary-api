@@ -15,6 +15,8 @@ export default function SubNarrativeList({
   subNarrativeTitle,
   narrativeId,
   media,
+  fakesByMediaData,
+  isLoading,
 }) {
   const router = useRouter();
   const { locale } = router;
@@ -23,14 +25,14 @@ export default function SubNarrativeList({
 
   const mediaName = media == "all" ? null : `media=${media}`;
 
-  const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
+  // const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
 
-  preload(FAKES_BY_MEDIA_URL, fetcher);
+  // preload(FAKES_BY_MEDIA_URL, fetcher);
 
-  const { data: fakesByMediaData, isLoading } = useSWR(
-    FAKES_BY_MEDIA_URL,
-    fetcher
-  );
+  // const { data: fakesByMediaData, isLoading } = useSWR(
+  //   FAKES_BY_MEDIA_URL,
+  //   fetcher
+  // );
 
   const dataLocale =
     locale == "ua"

@@ -11,6 +11,7 @@ import { FakesBarChart } from "@/components/FakesBarChart/FakesBarChart";
 import dynamic from "next/dynamic";
 
 import useSWR, { preload } from "swr";
+
 import { fetcher } from "../../../lib/fetcher";
 
 const SubNarrativeListByNarrative = dynamic(
@@ -31,10 +32,14 @@ const NarrativePage = () => {
   preload(NARRATIVES_URL, fetcher);
   preload(SUB_NARRATIVES_URL, fetcher);
 
-  const { data: narrativeData, error } = useSWR(NARRATIVES_URL, fetcher);
+  const { data: narrativeData } = useSWR(NARRATIVES_URL, fetcher, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
   const { data: subNarrativeData, isLoading } = useSWR(
     SUB_NARRATIVES_URL,
-    fetcher
+    fetcher,
+    { revalidateOnFocus: false, revalidateIfStale: false }
   );
 
   const narrativeDescription =

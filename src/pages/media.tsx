@@ -19,7 +19,10 @@ function Media() {
 
   const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
 
-  preload(MEDIA_URL, fetcher);
+  preload(MEDIA_URL, fetcher, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
 
   const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
   const [media, setMedia] = useState("");
@@ -36,7 +39,8 @@ function Media() {
 
   const { data: fakesByMediaData, isLoading } = useSWR(
     FAKES_BY_MEDIA_URL,
-    fetcher
+    fetcher,
+    { revalidateOnFocus: false, revalidateIfStale: false }
   );
 
   const subNarrativesRender =
@@ -50,6 +54,8 @@ function Media() {
           subNarrativeTitle={item}
           subNarrativeId={item.id}
           media={media}
+          fakesByMediaData={fakesByMediaData}
+          isLoading={isLoading}
         />
       );
     });

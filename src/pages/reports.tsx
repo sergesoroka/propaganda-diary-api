@@ -6,8 +6,6 @@ import styles from "../styles/Home.module.css";
 import ReportIcon from "../components/Icons/ReportIcon";
 import { motion } from "framer-motion";
 import YearsList from "@/components/YearsList/YearsList";
-import MonthsList from "@/components/MonthsList/MonthsList";
-import CountryList from "@/components/CountryList/CountryList";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -47,10 +45,13 @@ export default function MethodEn() {
 
   const { data, error } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
-
-  // 2023-07-31
 
   const reportDataRender =
     data &&
@@ -88,8 +89,6 @@ export default function MethodEn() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, type: "tween" }}
-
-          // style={{ width: "100%", margin: "0 auto" }}
         >
           <h1
             style={{
@@ -101,7 +100,6 @@ export default function MethodEn() {
             Monthy Reports
           </h1>
           <YearsList current={current} setCurrent={setCurrent} />
-          {/* <MonthsList current={currentMonth} setCurrent={setCurrentMonth} /> */}
 
           <hr
             style={{

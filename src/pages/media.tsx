@@ -19,12 +19,11 @@ function Media() {
 
   const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
 
-  preload(MEDIA_URL, fetcher, {
-    revalidateOnFocus: false,
+  const { data: mediaData } = useSWR(MEDIA_URL, fetcher, {
     revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
-
-  const { data: mediaData } = useSWR(MEDIA_URL, fetcher);
   const [media, setMedia] = useState("");
 
   useEffect(() => {
@@ -35,12 +34,14 @@ function Media() {
 
   const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
 
-  preload(FAKES_BY_MEDIA_URL, fetcher);
-
   const { data: fakesByMediaData, isLoading } = useSWR(
     FAKES_BY_MEDIA_URL,
     fetcher,
-    { revalidateOnFocus: false, revalidateIfStale: false }
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   const subNarrativesRender =

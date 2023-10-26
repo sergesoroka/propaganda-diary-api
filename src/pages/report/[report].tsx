@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
 import useSWR from "swr";
 
 import CountryList from "@/components/CountryList/CountryList";
@@ -40,7 +39,12 @@ function ReportPage() {
 
   const { data, error } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   const reportDataRender =
@@ -58,12 +62,6 @@ function ReportPage() {
             </h1>{" "}
             <p className={styles.reportsAuthor}>{item.author}</p>
             <p className={styles.reportsLead}>{item.lead}</p>
-            {/* <Image
-              src="https://voxukraine.org/wp-content/uploads/2023/08/Propaganda-diary.png"
-              width={922}
-              height={518}
-              alt="Picture of the author"
-            /> */}
             <p className={styles.reportsDisclaimer}>{item.disclaimer}</p>
             <CountryList
               country={country}

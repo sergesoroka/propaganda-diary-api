@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import useSWR, { preload } from "swr";
+import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 
 const useSearchAutoComplete = () => {
@@ -15,7 +15,11 @@ const useSearchAutoComplete = () => {
   const { locale } = router;
 
   const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?search=${value}&lang=${locale}`;
-  const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
+  const { data: searchData, error } = useSWR(SEARCH_URL, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const handleChange = (e) => {
     const query = e.target.value.toLowerCase();

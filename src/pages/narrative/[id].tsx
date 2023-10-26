@@ -29,17 +29,22 @@ const NarrativePage = () => {
   const NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?lang=${locale}&per_page=30`;
   const SUB_NARRATIVES_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?narrative=${id}&lang=${locale}`;
 
-  preload(NARRATIVES_URL, fetcher);
-  preload(SUB_NARRATIVES_URL, fetcher);
+  // preload(NARRATIVES_URL, fetcher);
+  // preload(SUB_NARRATIVES_URL, fetcher);
 
   const { data: narrativeData } = useSWR(NARRATIVES_URL, fetcher, {
-    revalidateOnFocus: false,
     revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
   const { data: subNarrativeData, isLoading } = useSWR(
     SUB_NARRATIVES_URL,
     fetcher,
-    { revalidateOnFocus: false, revalidateIfStale: false }
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   const narrativeDescription =
@@ -126,6 +131,7 @@ const NarrativePage = () => {
             marginBottom: "2rem",
           }}
         />
+        {isLoading && <Loader />}
         {subNarrativesRender}
       </div>
     </div>

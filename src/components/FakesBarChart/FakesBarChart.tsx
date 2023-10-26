@@ -16,8 +16,9 @@ export const FakesBarChart = () => {
 
   const MEDIA_BY_NARRATIVE_ID_URL = `https://vox-dashboard.ra-devs.tech/api/narratives?per_page=30&lang=${locale}`;
   const { data: dataNarrative } = useSWR(MEDIA_BY_NARRATIVE_ID_URL, fetcher, {
-    revalidateOnFocus: false,
     revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
 
   const renderNarratives =

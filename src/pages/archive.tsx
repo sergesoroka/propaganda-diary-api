@@ -6,24 +6,21 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import Timeline from "@/components/BarChart/Timeline";
 import YearsList from "@/components/YearsList/YearsList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import getStatisticData from "../../lib/getStatisticData";
+import useSWR from "swr";
+import { fetcher } from "../../lib/fetcher";
 
 const Archive = () => {
   const [current, setCurrent] = useState("2022");
-  const [statisticData, setStatisticData] = useState(null);
 
-  useEffect(() => {
-    let isMounted = true;
-    async function getNarrative() {
-      const dataFetched = await getStatisticData();
-      if (isMounted) {
-        setStatisticData(dataFetched);
-      }
-    }
-    getNarrative();
-  }, []);
+  const STATISTIC_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-statistic`;
+
+  const { data: statisticData } = useSWR(STATISTIC_URL, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const statisticRender =
     statisticData &&

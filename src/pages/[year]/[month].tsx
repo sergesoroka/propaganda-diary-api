@@ -10,6 +10,7 @@ import BackArrow from "@/components/Icons/BackArrow";
 import styles from "../../styles/Home.module.css";
 import Timeline from "@/components/BarChart/Timeline";
 import CountryList from "@/components/CountryList/CountryList";
+import Loader from "@/components/Icons/Loader";
 
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
@@ -17,7 +18,7 @@ import { fetcher } from "../../../lib/fetcher";
 const SubNarrativeListByMonth = dynamic(
   () => import("@/components/SubNarratives/SubNarrativeListByMonth"),
   {
-    loading: () => <p style={{ margin: "0 auto" }}>Loading...</p>,
+    loading: () => <Loader />,
   }
 );
 
@@ -39,7 +40,11 @@ export const MonthFakes = () => {
   const isMonth = month ? "&month=" + `${month}` : "";
 
   const MEDIA_BY_PARAMS = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?lang=${locale}${isYear}${isMonth}${isCountry}`;
-  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher);
+  const { data: mediaData, isLoading } = useSWR(MEDIA_BY_PARAMS, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const subNarrativesRender =
     mediaData &&

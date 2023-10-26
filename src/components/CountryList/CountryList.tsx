@@ -19,7 +19,11 @@ function CountryList({
 
   const COUNTRY_URL = `https://vox-dashboard.ra-devs.tech/api/countries?lang=${locale}`;
 
-  preload(COUNTRY_URL, fetcher);
+  preload(COUNTRY_URL, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const { data: countryData } = useSWR(COUNTRY_URL, fetcher);
 

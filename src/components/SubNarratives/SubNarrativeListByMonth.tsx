@@ -46,7 +46,7 @@ export default function SubNarrativeListByMonth({
     mediaData[subNarrativeTitle].map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <Link href={item.link_archive}>
+          <Link href={item.link_archive} target="_blank">
             <p className={styles.mediaName}>{item.media_name}</p>
           </Link>
           <p className={styles.mediaCountry}>{item.country}</p>

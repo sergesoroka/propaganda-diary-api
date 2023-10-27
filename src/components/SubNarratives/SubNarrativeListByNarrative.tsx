@@ -49,7 +49,7 @@ export default function SubNarrativeList({
     mediaData[subNarrativeTitle].map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
-          <Link href={item.link}>
+          <Link href={item.link_archive}>
             <p className={styles.mediaName}>{item.media_name}</p>
           </Link>
           <p className={styles.mediaCountry}>{item.country}</p>

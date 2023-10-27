@@ -6,7 +6,7 @@ import CountryList from "@/components/CountryList/CountryList";
 import MediaList from "@/components/MediaList/MediaList";
 import SubNarrativeList from "@/components/SubNarratives/SubNarrativeList";
 
-import useSWR, { preload } from "swr";
+import useSWR from "swr";
 import { fetcher } from "../../lib/fetcher";
 
 import { useRouter } from "next/router";

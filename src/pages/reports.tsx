@@ -53,9 +53,15 @@ export default function MethodEn() {
     }
   );
 
+  const sortedData =
+    data &&
+    data.data.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+
   const reportDataRender =
     data &&
-    data.data.map((item, i) => {
+    sortedData.map((item, i) => {
       if (format(new Date(item.date), "yyyy") == current) {
         return (
           <Link key={i} href={{ pathname: `/report/${item.date}` }}>

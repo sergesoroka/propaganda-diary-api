@@ -443,6 +443,7 @@
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-around;
+    gap: 1rem;
   }
 
   .mainLeft,
@@ -563,6 +564,13 @@
       rgb(var(--background-end-rgb)) 40%
     );
     z-index: 1;
+  }
+  .reports h1 {
+    font-family: var(--font) !important;
+    font-size: 25px;
+    color: #676767;
+    line-height: 2rem;
+    padding: 0 !important;
   }
 }
 

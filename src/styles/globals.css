@@ -58,7 +58,7 @@ a {
   font-size: 34px;
   color: #676767;
   line-height: 3rem;
-  padding: 0 5rem !important;
+  /* padding: 0 5rem; */
 }
 
 .single-post-lead {

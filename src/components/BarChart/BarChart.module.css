@@ -51,8 +51,9 @@
   color: #a4a4a4;
   display: flex;
   justify-content: space-between;
-  width: 45px;
+  width: 100%;
   font-size: 0.84rem;
+  padding: 0 24px 0 27px;
 }
 
 .barNumbers > p {

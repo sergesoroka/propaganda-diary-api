@@ -9,16 +9,15 @@ import { fetcher } from "../../../lib/fetcher";
 
 import styles from "./SubNarrative.module.css";
 
-export default function SubNarrativeBySearch({ title }) {
+export default function SubNarrativeBySearch({ title, id }) {
   const router = useRouter();
   const { locale } = router;
   const [open, setOpen] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
 
-  const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?search=${searchResult}&lang=${locale}`;
+  const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards?lang=${locale}&sub_narrative_id=${searchResult}`;
 
-  preload(SEARCH_URL, fetcher);
-  const { data: searchData, error } = useSWR(SEARCH_URL, fetcher);
+  const { data: searchData, error } = useSWR(open ? SEARCH_URL : null, fetcher);
 
   const dataLocale =
     locale == "ua"
@@ -43,8 +42,8 @@ export default function SubNarrativeBySearch({ title }) {
 
   const renderMedia =
     searchData &&
-    title &&
-    searchData[title].map((item, i) => {
+    id &&
+    searchData.data.map((item, i) => {
       return (
         <div key={i} className={styles.mediaList}>
           <Link href={item.link_archive} target="_blank">
@@ -65,7 +64,7 @@ export default function SubNarrativeBySearch({ title }) {
       <h2
         className={open ? styles.fakeHeadingActive : styles.fakeHeading}
         onClick={() => {
-          setSearchResult(title);
+          setSearchResult(id);
           setOpen(!open);
         }}
       >

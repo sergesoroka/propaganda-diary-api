@@ -34,7 +34,6 @@ function CountryList({
           className={country == item.name ? styles.activeCountry : ""}
           onClick={() => {
             setCountry(item.name);
-            setMedia("");
           }}
         >
           {item.name}

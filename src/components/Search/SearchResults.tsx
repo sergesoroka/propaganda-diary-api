@@ -3,13 +3,15 @@ import styles from "../../components/SubNarratives/SubNarrative.module.css";
 import SubNarrativeBySearch from "../SubNarratives/SubNarrativeBySearch";
 
 const SearchResults = ({ suggestions }: { suggestions: never[] }) => {
-  const renderedSearchData = suggestions.map((title, i) => {
-    return (
-      <div key={i}>
-        <SubNarrativeBySearch title={title} />
-      </div>
-    );
-  });
+  const renderedSearchData =
+    suggestions &&
+    suggestions.map((item, i) => {
+      return (
+        <div key={i}>
+          <SubNarrativeBySearch title={item.title} id={item.id} />
+        </div>
+      );
+    });
 
   return (
     <div>

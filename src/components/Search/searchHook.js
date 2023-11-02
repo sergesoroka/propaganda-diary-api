@@ -9,29 +9,33 @@ const useSearchAutoComplete = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
   const [suggestionsActive, setSuggestionsActive] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState();
 
   const router = useRouter();
   const { locale } = router;
 
-  const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?search=${value}&lang=${locale}`;
-  const { data: searchData, error } = useSWR(SEARCH_URL, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const SEARCH_URL = `https://vox-dashboard.ra-devs.tech/api/sub-narratives?lang=${locale}&search=${value}`;
+  const { data: searchData, error } = useSWR(
+    value ? SEARCH_URL : null,
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
   const handleChange = (e) => {
     const query = e.target.value.toLowerCase();
     setValue(query);
     if (query.length > 1 && searchData) {
-      const arrayFromObjectData = Object.keys(searchData);
+      // const arrayFromObjectData = Object.keys(searchData);
 
       const filterSuggestions =
-        arrayFromObjectData &&
-        arrayFromObjectData.map((item) => {
-          setSearchResult((prev) => [...prev, searchData[item]]);
-          // searchResult.push(searchData.data[item]);
+        searchData &&
+        searchData.data.map((item) => {
+          setSearchResult((prev) => [...prev, item]);
+          // searchResult.push(item);
           return item;
         });
       // .filter((suggestion) => suggestion.toLowerCase().indexOf(query) > -1);

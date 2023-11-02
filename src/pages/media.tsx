@@ -15,9 +15,23 @@ import Loader from "@/components/Icons/Loader";
 function Media() {
   const router = useRouter();
   const { locale } = router;
-  const [country, setCountry] = useState("Польща");
 
-  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0`;
+  const poland =
+    (locale == "ua" && "Польща") ||
+    (locale == "en" && "Poland") ||
+    (locale == "it" && "Polonia") ||
+    (locale == "de" && "Polen") ||
+    (locale == "ru" && "Польша") ||
+    (locale == "pl" && "Polska") ||
+    (locale == "hu" && "Lengyelország") ||
+    (locale == "cs" && "Polsko") ||
+    (locale == "sk" && "Poľsko");
+
+  const [country, setCountry] = useState(poland);
+
+  console.log(country);
+
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0&lang=${locale}`;
 
   const { data: mediaData } = useSWR(MEDIA_URL, fetcher, {
     revalidateIfStale: false,
@@ -28,7 +42,7 @@ function Media() {
 
   useEffect(() => {
     setMedia(mediaData && mediaData.data[0].name);
-  }, [country, mediaData, setMedia]);
+  }, [country, mediaData, media, setMedia, locale]);
 
   const mediaName = media && `media=${media}`;
 

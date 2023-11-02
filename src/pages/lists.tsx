@@ -19,7 +19,7 @@ export default function ListsPage() {
     (locale == "en" && "Poland") ||
     (locale == "it" && "Polonia") ||
     (locale == "de" && "Polen") ||
-    (locale == "ru" && "Польща") ||
+    (locale == "ru" && "Польша") ||
     (locale == "pl" && "Polska") ||
     (locale == "hu" && "Lengyelország") ||
     (locale == "cs" && "Polsko") ||
@@ -202,7 +202,7 @@ export default function ListsPage() {
             {locale == "en" && "Poland"}
             {locale == "it" && "Polonia"}
             {locale == "de" && "Polen"}
-            {locale == "ru" && "Польща"}
+            {locale == "ru" && "Польша"}
             {locale == "pl" && "Polska"}
             {locale == "hu" && "Lengyelország"}
             {locale == "cs" && "Polsko"}

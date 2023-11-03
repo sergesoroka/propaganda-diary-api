@@ -41,10 +41,13 @@ function Media() {
     }
   );
   const [media, setMedia] = useState("");
+  useEffect(() => {
+    setCountry(poland);
+  }, [setCountry, poland, locale]);
 
   useEffect(() => {
     setMedia(mediaData && mediaData.data[0].name);
-  }, [country, mediaData, setMedia, locale]);
+  }, [mediaData, setMedia]);
 
   const mediaName = media && `media=${media}`;
 

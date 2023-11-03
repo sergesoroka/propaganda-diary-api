@@ -29,7 +29,7 @@ function Media() {
 
   const [country, setCountry] = useState(poland);
 
-  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0&lang=${locale}`;
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${poland}&media_type=0&lang=${locale}`;
 
   const { data: mediaData } = useSWR(
     country && locale ? MEDIA_URL : null,
@@ -44,14 +44,14 @@ function Media() {
 
   useEffect(() => {
     setMedia(mediaData && mediaData.data[0].name);
-  }, [country, mediaData, setMedia]);
+  }, [country, mediaData, setMedia, locale]);
 
   const mediaName = media && `media=${media}`;
 
   const FAKES_BY_MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboards-by-fakes?${mediaName}&lang=${locale}`;
 
   const { data: fakesByMediaData, isLoading } = useSWR(
-    FAKES_BY_MEDIA_URL,
+    mediaName && locale ? FAKES_BY_MEDIA_URL : null,
     fetcher,
     {
       revalidateIfStale: false,

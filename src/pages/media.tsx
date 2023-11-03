@@ -29,20 +29,22 @@ function Media() {
 
   const [country, setCountry] = useState(poland);
 
-  console.log(country);
-
   const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0&lang=${locale}`;
 
-  const { data: mediaData } = useSWR(MEDIA_URL, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const { data: mediaData } = useSWR(
+    country && locale ? MEDIA_URL : null,
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
   const [media, setMedia] = useState("");
 
   useEffect(() => {
     setMedia(mediaData && mediaData.data[0].name);
-  }, [country, mediaData, media, setMedia, locale]);
+  }, [country, mediaData, setMedia]);
 
   const mediaName = media && `media=${media}`;
 

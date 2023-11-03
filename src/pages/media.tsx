@@ -29,7 +29,7 @@ function Media() {
 
   const [country, setCountry] = useState(poland);
 
-  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${poland}&media_type=0&lang=${locale}`;
+  const MEDIA_URL = `https://vox-dashboard.ra-devs.tech/api/dashboard-media?country=${country}&media_type=0&lang=${locale}`;
 
   const { data: mediaData } = useSWR(
     country && locale ? MEDIA_URL : null,

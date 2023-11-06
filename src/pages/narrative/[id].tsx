@@ -7,7 +7,7 @@ import BackArrow from "@/components/Icons/BackArrow";
 import SpetialText from "../../../data/SpetialText";
 import Loader from "@/components/Icons/Loader";
 
-import { FakesBarChart } from "@/components/FakesBarChart/FakesBarChart";
+import { MediaCasesBarChart } from "@/components/FakesBarChart/MediaCasesBarChart";
 import dynamic from "next/dynamic";
 
 import useSWR, { preload } from "swr";
@@ -47,13 +47,17 @@ const NarrativePage = () => {
     }
   );
 
+  let cases = 0;
+
   const narrativeDescription =
     narrativeData &&
     // @ts-ignore
     narrativeData.data.map((item) => {
       if (item.id == id) {
+        cases = item.dashboards_count;
         return (
           <div key={item.id}>
+            {/* <p>Total Number of Cases: {item.dashboards_count}</p> */}
             <h2 className={styles.narrativeHeading}>{item.title}</h2>
             <hr
               style={{
@@ -102,9 +106,10 @@ const NarrativePage = () => {
       </Head>
       <div className={styles.barChartWrap}>
         <p className={styles.fakesNumber}>
-          <SpetialText name={"Fakes"} />: {count > 0 && count}
+          {/* <SpetialText name={"Fakes"} /> */}
+          Total Number of Cases: {cases > 0 && cases}
         </p>
-        <FakesBarChart />
+        <MediaCasesBarChart />
       </div>
 
       <div className={styles.narrativeContent}>

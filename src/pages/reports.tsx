@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import YearsList from "@/components/YearsList/YearsList";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import SpetialText from "../../data/SpetialText";
 
 import { format } from "date-fns";
 import { uk, de, enUS, ru, pl, cs, it, sk, hu } from "date-fns/locale";
@@ -101,9 +102,10 @@ export default function MethodEn() {
               textAlign: "center",
               textTransform: "uppercase",
               margin: "4rem 0",
+              letterSpacing: "0.8px",
             }}
           >
-            Monthly Reports
+            <SpetialText name={"Monthly reviews"} />
           </h1>
           <YearsList current={current} setCurrent={setCurrent} />
 

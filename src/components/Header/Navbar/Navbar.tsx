@@ -52,7 +52,7 @@ const Navbar = () => {
       </Link>
       <Link href="/reports">
         <li className={pathname === "/reports" ? styles.activeLink : ""}>
-          <SpetialText name={"Reports"} />
+          <SpetialText name={"Reviews"} />
         </li>
       </Link>
 

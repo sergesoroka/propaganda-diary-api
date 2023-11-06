@@ -310,5 +310,29 @@
         "cs": "Prosinec",
         "sk": "december",
         "hu": "december"
+    },
+    {
+        "key": "Reviews",
+        "en": "Reviews",
+        "it": "Ricerche",
+        "de": "Überblicke",
+        "ua": "Огляди",
+        "ru": "Обзоры",
+        "pl": "Przeglądy",
+        "cs": "Přehledy",
+        "sk": "Prehľady",
+        "hu": "Áttekintéseket"
+    },
+    {
+        "key": "Monthly reviews",
+        "en": "Monthly reviews",
+        "it": "Ricerca mensile",
+        "de": "Monatliche Überblicke",
+        "ua": "Щомісячні огляди",
+        "ru": "Ежемесячные обзоры",
+        "pl": "Przeglądy miesięczne",
+        "cs": "Měsíční přehledy",
+        "sk": "Mesačné prehľady",
+        "hu": "Havi áttekintések"
     }
 ]

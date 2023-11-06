@@ -103,7 +103,7 @@ export default function MethodEn() {
               margin: "4rem 0",
             }}
           >
-            Monthy Reports
+            Monthly Reports
           </h1>
           <YearsList current={current} setCurrent={setCurrent} />
 

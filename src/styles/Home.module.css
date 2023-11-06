@@ -346,9 +346,11 @@
   transition-duration: 0.2s;
 }
 .fakesNumber {
-  color: #ff2618 !important;
+  /* color: #ff2618 !important; */
   font-size: 0.86rem;
   text-transform: uppercase;
+  width: 70%;
+  margin: 0 auto;
 }
 .narrativePageHeading {
   color: #424242;

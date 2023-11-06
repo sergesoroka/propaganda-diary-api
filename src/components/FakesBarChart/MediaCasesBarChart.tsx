@@ -44,7 +44,7 @@ export const MediaCasesBarChart = () => {
       transition={{ duration: 0.3, type: "tween" }}
     >
       <div>
-        <svg width="950" height="400" style={{ transform: "scaleY(-1)" }}>
+        <svg width="950" height="320" style={{ transform: "scaleY(-1)" }}>
           {dataNarrative && renderNarratives}
         </svg>
       </div>

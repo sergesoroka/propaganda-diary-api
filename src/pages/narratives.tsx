@@ -1,7 +1,7 @@
 import styles from "@/styles/Home.module.css";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { FakesBarChart } from "@/components/FakesBarChart/FakesBarChart";
+import { MediaCasesBarChart } from "@/components/FakesBarChart/MediaCasesBarChart";
 
 const AllNarratives = dynamic(
   () => import("@/components/LatestNarratives/AllNarratives"),
@@ -21,7 +21,7 @@ const Narratives = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.barChartWrap}>
-        <FakesBarChart />
+        <MediaCasesBarChart />
       </div>
       <div className={styles.allNarrativesWrap}>
         <AllNarratives />

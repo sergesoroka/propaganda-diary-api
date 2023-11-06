@@ -105,8 +105,7 @@ const NarrativePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <p className={styles.fakesNumber}>
-        {/* <SpetialText name={"Fakes"} /> */}
-        Total Number of Cases: {cases > 0 && cases}
+        <SpetialText name={"TOTAL NUMBER OF CASES"} />: {cases > 0 && cases}
       </p>
       <div className={styles.barChartWrap}>
         <MediaCasesBarChart />

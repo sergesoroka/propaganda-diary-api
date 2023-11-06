@@ -334,5 +334,17 @@
         "cs": "Měsíční přehledy",
         "sk": "Mesačné prehľady",
         "hu": "Havi áttekintések"
+    },
+    {
+        "key": "TOTAL NUMBER OF CASES",
+        "en": "TOTAL NUMBER OF CASES",
+        "it": "NUMERO TOTALE DI CASI",
+        "de": "Gesamtzahl der Fälle",
+        "ua": "ЗАГАЛЬНА КІЛЬКІСТЬ КЕЙСІВ",
+        "ru": "ОБЩЕЕ КОЛИЧЕСТВО КЕЙСОВ",
+        "pl": "ŁĄCZNA LICZBA PRZYPADKÓW",
+        "cs": "CELKOVÝ POČET PŘÍPADŮ",
+        "sk": "CELKOVÝ POČET PRÍPADOV",
+        "hu": "ESETEK ÖSSZESEN"
     }
 ]

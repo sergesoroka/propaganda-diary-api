@@ -87,7 +87,7 @@ export default function MethodEn() {
     <div>
       <Head>
         <title>Propaganda Diary | Reports</title>
-        <meta name="description" content="Monthy Reports" />
+        <meta name="description" content="Monthly Reports" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>

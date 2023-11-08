@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import useSWR from "swr";
@@ -14,28 +14,18 @@ function ReportPage() {
   const router = useRouter();
   const { locale } = router;
 
-  const countryLocale =
-    locale == "ua"
-      ? "Польща"
-      : locale == "de"
-      ? "Polen"
-      : locale == "pl"
-      ? "Polska"
-      : locale == "en"
-      ? "Poland"
-      : locale == "sk"
-      ? "Poľsko"
-      : locale == "it"
-      ? "Polonia"
-      : locale == "hu"
-      ? "Lengyelország"
-      : locale == "cs"
-      ? "Polsko"
-      : locale == "ru"
-      ? "Польща"
-      : "Польща";
+  const poland =
+    (locale == "ua" && "Польща") ||
+    (locale == "en" && "Poland") ||
+    (locale == "it" && "Polonia") ||
+    (locale == "de" && "Polen") ||
+    (locale == "ru" && "Польша") ||
+    (locale == "pl" && "Polska") ||
+    (locale == "hu" && "Lengyelország") ||
+    (locale == "cs" && "Polsko") ||
+    (locale == "sk" && "Poľsko");
 
-  const [country, setCountry] = useState(countryLocale);
+  const [country, setCountry] = useState(poland);
 
   const { data, error } = useSWR(
     `https://vox-dashboard.ra-devs.tech/api/pages?lang=${locale}`,
@@ -46,6 +36,10 @@ function ReportPage() {
       revalidateOnReconnect: false,
     }
   );
+
+  useEffect(() => {
+    setCountry(poland);
+  }, [setCountry, poland, locale]);
 
   const reportDataRender =
     data &&
